@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace presentación
 {
-    public partial class Form1 : Form
+    public partial class presentacion : Form
     {
-        public Form1()
+        public presentacion()
         {
             InitializeComponent();
+            LoadPresentacion();
+        }
+
+        private void LoadPresentacion()
+        {
+            frmPrincipal screen = new frmPrincipal();
+            screen.MdiParent = this;
+            screen.Show();
         }
     }
 }
