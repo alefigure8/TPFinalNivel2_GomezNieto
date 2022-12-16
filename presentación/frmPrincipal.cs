@@ -9,19 +9,24 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using negocio;
 using dominio;
+using helper;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace presentación
 {
     public partial class frmPrincipal : Form
     {
-        private List<Producto> listaProductos;
+        private List<Producto> listaProductos = null;
         private List<Producto> listaProductosAux;
         int pagina;
         public frmPrincipal()
         {
             InitializeComponent();
-            LoadfrmPrincipal();
+
+            //Cargar las listas solo una vez
+            if(listaProductos == null)
+                LoadfrmPrincipal();
+
             pagina = 0;
         }
 
@@ -35,10 +40,15 @@ namespace presentación
                 cantidadEncontrada();
                 comboBoxOrdenarPor();
                 comboBoxCantidad();
+
+                if (!checlBusquedaAvanzada.Checked)
+                {
+                    panelSearch.Size = new Size(307, 75);
+
+                }
             }
             catch (Exception)
             {
-
                 MessageBox.Show("No se pudo cargar los productos");
             }
         }
@@ -58,7 +68,6 @@ namespace presentación
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -73,9 +82,7 @@ namespace presentación
 
             //SORT
             if (sort)
-            {
                 sortListaProducto();
-            }
         }
 
         private void sortListaProducto()
@@ -84,7 +91,7 @@ namespace presentación
             {
                 listaProductosAux = listaProductos;
 
-            if (comboBoxOrdenar.SelectedItem.ToString() == "Nombre")
+                if (comboBoxOrdenar.SelectedItem.ToString() == "Nombre")
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.Nombre).ToList();
                 }
@@ -100,15 +107,17 @@ namespace presentación
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.Precio).ToList();
                 }
+                else if (comboBoxOrdenar.SelectedItem.ToString() == "Codigo")
+                {
+                    listaProductosAux = listaProductosAux.OrderBy(x => x.Codigo).ToList();
+                }
 
                 mostrarPorCantidad();
             }
             catch (Exception e)
             {
-
                 throw e;
             }
-            
         }
 
         private void mostrarPorCantidad()
@@ -121,20 +130,30 @@ namespace presentación
 
         private void comboBoxOrdenarPor()
         {
-            comboBoxOrdenar.Items.Add("Nombre");
-            comboBoxOrdenar.Items.Add("Marca");
-            comboBoxOrdenar.Items.Add("Categoria");
-            comboBoxOrdenar.Items.Add("Precio");
-            comboBoxOrdenar.SelectedIndex = 0;
+            try
+            {
+                listaDesplegable listaCantidad = new listaDesplegable();
+                comboBoxOrdenar.DataSource = listaCantidad.cargarBusqueraColumnas();
+                comboBoxOrdenar.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al cargar lista");
+            }
         }
 
         private void comboBoxCantidad()
         {
-            comboBoxMostrarCantidad.Items.Add("10");
-            comboBoxMostrarCantidad.Items.Add("3");
-            comboBoxMostrarCantidad.Items.Add("2");
-            comboBoxMostrarCantidad.Items.Add("1");
-            comboBoxMostrarCantidad.SelectedIndex = 0;
+            try
+            {
+                listaDesplegable listaCantidad = new listaDesplegable();
+                comboBoxMostrarCantidad.DataSource = listaCantidad.cargarBusquedaNumeros();
+                comboBoxMostrarCantidad.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al cargar lista");
+            }
         }
 
         private void paginacionProductos(string direccion = "adelante")
@@ -150,24 +169,21 @@ namespace presentación
                     pagina++;
 
                     if (pagina > total)
-                    {
                         pagina = total;
-                    }
                 }
+                //Anterior
                 else
                 {
                     pagina--;
 
                     if (pagina < 0)
-                    {
                         pagina = 0;
-                    }
                 }
 
                 //Cortar lista
                 var subset = listaProductosAux.Skip(mostrar * pagina).Take(mostrar).ToList();
 
-                //Render
+                //Render elementos
                 lbPaginas.Text = $"Página {pagina + 1}";
                 dgvProductos.DataSource = subset;
             }
@@ -214,6 +230,30 @@ namespace presentación
             //Primera Pagina
             pagina = 0;
             paginacionProductos();
+        }
+
+        private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Mostrar productos al hacer doble click sobre uno en el grid view
+            Producto producto = new Producto();
+            if(dgvProductos.CurrentRow != null)
+            {
+                producto = (Producto)dgvProductos.CurrentRow.DataBoundItem;
+                MessageBox.Show(producto.Nombre);
+            }
+        }
+
+        private void checlBusquedaAvanzada_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checlBusquedaAvanzada.Checked)
+            {
+                panelSearch.Size = new Size(307, 228);
+
+            }
+            else
+            {
+                panelSearch.Size = new Size(307, 75);
+            }
         }
     }
 }
