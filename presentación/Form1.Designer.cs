@@ -40,6 +40,7 @@ namespace presentación
             this.panelBtnPrincipal = new System.Windows.Forms.Panel();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnCatalogo = new System.Windows.Forms.Button();
+            this.lbFecha = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.sidePanel.SuspendLayout();
@@ -49,6 +50,7 @@ namespace presentación
             // 
             this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
             this.headerPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.headerPanel.Controls.Add(this.lbFecha);
             this.headerPanel.Controls.Add(this.picLogo);
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerPanel.ImeMode = System.Windows.Forms.ImeMode.Off;
@@ -144,7 +146,7 @@ namespace presentación
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(141, 53);
             this.btnAbout.TabIndex = 6;
-            this.btnAbout.Text = "     About";
+            this.btnAbout.Text = "     Acerca";
             this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAbout.UseVisualStyleBackColor = false;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
@@ -169,6 +171,17 @@ namespace presentación
             this.btnCatalogo.UseVisualStyleBackColor = false;
             this.btnCatalogo.Click += new System.EventHandler(this.btnCatalogo_Click);
             // 
+            // lbFecha
+            // 
+            this.lbFecha.AutoSize = true;
+            this.lbFecha.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbFecha.Location = new System.Drawing.Point(846, 9);
+            this.lbFecha.Name = "lbFecha";
+            this.lbFecha.Size = new System.Drawing.Size(221, 16);
+            this.lbFecha.TabIndex = 1;
+            this.lbFecha.Text = "viernes, 00 de diciembre de 2022";
+            // 
             // presentacion
             // 
             this.AllowDrop = true;
@@ -182,13 +195,14 @@ namespace presentación
             this.Controls.Add(this.headerPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "presentacion";
-            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Catalogo";
             this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.sidePanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -205,6 +219,7 @@ namespace presentación
         private Panel panelBtnAbout;
         private Button btnPresupuesto;
         private Panel panelBtnPresupuesto;
+        private Label lbFecha;
     }
 }
 
