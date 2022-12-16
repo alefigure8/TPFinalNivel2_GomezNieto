@@ -59,5 +59,41 @@ namespace negocio
                 datoSQL.closeConnection();
             }
         }
+
+        public List<Producto> busquedaAvanzada(string filtro, string campo, string criterio)
+        {
+            List<Producto> aux = new List<Producto>();
+            AccesoDB datosSQL = new AccesoDB();
+
+            try
+            {
+                string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdMarca, A.IdCategoria, C.Descripcion as CategoriaDescripcion, M.Descripcion as MarcaDescripcion, A.Precio " +
+                    "from ARTICULOS A, CATEGORIAS C, MARCAS M " +
+                    "where A.IdCategoria = C.Id AND A.IdMarca = M.Id" +
+                    $"AND ";
+
+                //switch
+
+                datosSQL.setQuery(query);
+                datosSQL.executeReader();
+
+                while(datosSQL.Reader.Read())
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datosSQL.closeConnection();
+            }
+
+
+            return listaProductos;
+        }
     }
 }
