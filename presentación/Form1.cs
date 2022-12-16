@@ -10,7 +10,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Bunifu;
 
 namespace presentación
 {
@@ -29,16 +28,17 @@ namespace presentación
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
-            //panelBtnAbout.Visible = false;
-            //panelBtnPresupuesto.Visible = false;
-            //panelBtnPrincipal.Visible = true;
+            cargarFecha();
+        }
 
-
+        private void cargarFecha()
+        {
+            lbFecha.Text = DateTime.Now.ToLongDateString();
         }
 
         protected override void OnLoad(EventArgs e)
         {
-            //Remover Border MDIContainer
+            //Remover Bordes MDIContainer
             var mdiclient = this.Controls.OfType<MdiClient>().Single();
             this.SuspendLayout();
             mdiclient.SuspendLayout();
@@ -53,7 +53,8 @@ namespace presentación
             mdiclient.ResumeLayout(true);
             this.ResumeLayout(true);
             base.OnLoad(e);
-            //Remove Menu MDIContainer
+
+            //Remover Menu MDIContainer
             this.MainMenuStrip = new MenuStrip();
             this.MainMenuStrip.Visible = false;
         }
@@ -64,9 +65,6 @@ namespace presentación
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
-            //panelBtnAbout.Visible = true;
-            //panelBtnPrincipal.Visible = false;
-            //panelBtnPresupuesto.Visible = false;
         }
 
         private void btnCatalogo_Click(object sender, EventArgs e)
@@ -75,9 +73,6 @@ namespace presentación
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
-            //panelBtnAbout.Visible = false;
-            //panelBtnPresupuesto.Visible = false;
-            //panelBtnPrincipal.Visible = true;
         }
 
         private void btnPresupuesto_Click(object sender, EventArgs e)
@@ -86,15 +81,11 @@ namespace presentación
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
-            //panelBtnAbout.Visible = false;
-            //panelBtnPresupuesto.Visible = true;
-            //panelBtnPrincipal.Visible = false;
         }
 
         private void propiedadesBtn()
         {
             Color btnNonSelected = Color.FromArgb(38,62,79);
-            //Color btnSelected = Color.FromArgb(53, 86, 111);
             Color btnSelected = Color.FromArgb(27, 44, 56);
 
             foreach (var views in this.MdiChildren)
