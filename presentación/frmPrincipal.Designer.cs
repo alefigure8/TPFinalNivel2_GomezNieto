@@ -30,11 +30,11 @@ namespace presentación
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.labelFrmPrincipalCatalogo = new System.Windows.Forms.Label();
@@ -49,20 +49,20 @@ namespace presentación
             this.btnFirst = new System.Windows.Forms.PictureBox();
             this.btnPreview = new System.Windows.Forms.PictureBox();
             this.panelSearch = new System.Windows.Forms.Panel();
+            this.cbMarca = new System.Windows.Forms.ComboBox();
+            this.cbCategoria = new System.Windows.Forms.ComboBox();
+            this.cbCriterio = new System.Windows.Forms.ComboBox();
+            this.cbCampo = new System.Windows.Forms.ComboBox();
+            this.lbCategoria = new System.Windows.Forms.Label();
+            this.lbMarca = new System.Windows.Forms.Label();
+            this.lbCriterio = new System.Windows.Forms.Label();
+            this.lbCampo = new System.Windows.Forms.Label();
+            this.checlBusquedaAvanzada = new System.Windows.Forms.CheckBox();
+            this.lbBusquedaAvanzada = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtBoxSearch = new System.Windows.Forms.TextBox();
             this.panelSearchTitlle = new System.Windows.Forms.Panel();
             this.lbSearchTitle = new System.Windows.Forms.Label();
-            this.txtBoxSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.lbBusquedaAvanzada = new System.Windows.Forms.Label();
-            this.checlBusquedaAvanzada = new System.Windows.Forms.CheckBox();
-            this.lbCampo = new System.Windows.Forms.Label();
-            this.lbCriterio = new System.Windows.Forms.Label();
-            this.lbMarca = new System.Windows.Forms.Label();
-            this.lbCategoria = new System.Windows.Forms.Label();
-            this.cbCampo = new System.Windows.Forms.ComboBox();
-            this.cbCriterio = new System.Windows.Forms.ComboBox();
-            this.cbCategoria = new System.Windows.Forms.ComboBox();
-            this.cbMarca = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnNext)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnLast)).BeginInit();
@@ -76,57 +76,57 @@ namespace presentación
             // 
             this.dgvProductos.AllowUserToResizeColumns = false;
             this.dgvProductos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle36.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            this.dgvProductos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductos.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvProductos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvProductos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle37.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle37.NullValue = null;
-            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.DarkOrange;
-            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle7.NullValue = null;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkOrange;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle38.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle38.NullValue = null;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvProductos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvProductos.GridColor = System.Drawing.SystemColors.WindowText;
             this.dgvProductos.Location = new System.Drawing.Point(28, 118);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle39.BackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.DimGray;
-            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvProductos.RowHeadersVisible = false;
             this.dgvProductos.RowHeadersWidth = 35;
             this.dgvProductos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle40.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Gainsboro;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(550, 252);
             this.dgvProductos.TabIndex = 0;
@@ -279,6 +279,139 @@ namespace presentación
             this.panelSearch.Size = new System.Drawing.Size(307, 228);
             this.panelSearch.TabIndex = 12;
             // 
+            // cbMarca
+            // 
+            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbMarca.FormattingEnabled = true;
+            this.cbMarca.Location = new System.Drawing.Point(21, 149);
+            this.cbMarca.Name = "cbMarca";
+            this.cbMarca.Size = new System.Drawing.Size(121, 21);
+            this.cbMarca.TabIndex = 11;
+            // 
+            // cbCategoria
+            // 
+            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategoria.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategoria.FormattingEnabled = true;
+            this.cbCategoria.Location = new System.Drawing.Point(169, 149);
+            this.cbCategoria.Name = "cbCategoria";
+            this.cbCategoria.Size = new System.Drawing.Size(121, 21);
+            this.cbCategoria.TabIndex = 10;
+            // 
+            // cbCriterio
+            // 
+            this.cbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCriterio.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCriterio.FormattingEnabled = true;
+            this.cbCriterio.Location = new System.Drawing.Point(168, 97);
+            this.cbCriterio.Name = "cbCriterio";
+            this.cbCriterio.Size = new System.Drawing.Size(121, 21);
+            this.cbCriterio.TabIndex = 9;
+            // 
+            // cbCampo
+            // 
+            this.cbCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCampo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCampo.FormattingEnabled = true;
+            this.cbCampo.Location = new System.Drawing.Point(21, 97);
+            this.cbCampo.Name = "cbCampo";
+            this.cbCampo.Size = new System.Drawing.Size(121, 21);
+            this.cbCampo.TabIndex = 8;
+            this.cbCampo.SelectedIndexChanged += new System.EventHandler(this.cbCampo_SelectedIndexChanged);
+            // 
+            // lbCategoria
+            // 
+            this.lbCategoria.AutoSize = true;
+            this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbCategoria.Location = new System.Drawing.Point(171, 132);
+            this.lbCategoria.Name = "lbCategoria";
+            this.lbCategoria.Size = new System.Drawing.Size(66, 14);
+            this.lbCategoria.TabIndex = 7;
+            this.lbCategoria.Text = "Categoria";
+            // 
+            // lbMarca
+            // 
+            this.lbMarca.AutoSize = true;
+            this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMarca.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbMarca.Location = new System.Drawing.Point(24, 132);
+            this.lbMarca.Name = "lbMarca";
+            this.lbMarca.Size = new System.Drawing.Size(43, 14);
+            this.lbMarca.TabIndex = 6;
+            this.lbMarca.Text = "Marca";
+            // 
+            // lbCriterio
+            // 
+            this.lbCriterio.AutoSize = true;
+            this.lbCriterio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCriterio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbCriterio.Location = new System.Drawing.Point(171, 80);
+            this.lbCriterio.Name = "lbCriterio";
+            this.lbCriterio.Size = new System.Drawing.Size(52, 14);
+            this.lbCriterio.TabIndex = 5;
+            this.lbCriterio.Text = "Criterio";
+            // 
+            // lbCampo
+            // 
+            this.lbCampo.AutoSize = true;
+            this.lbCampo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCampo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbCampo.Location = new System.Drawing.Point(21, 80);
+            this.lbCampo.Name = "lbCampo";
+            this.lbCampo.Size = new System.Drawing.Size(49, 14);
+            this.lbCampo.TabIndex = 4;
+            this.lbCampo.Text = "Campo";
+            // 
+            // checlBusquedaAvanzada
+            // 
+            this.checlBusquedaAvanzada.AutoSize = true;
+            this.checlBusquedaAvanzada.Location = new System.Drawing.Point(168, 45);
+            this.checlBusquedaAvanzada.Name = "checlBusquedaAvanzada";
+            this.checlBusquedaAvanzada.Size = new System.Drawing.Size(15, 14);
+            this.checlBusquedaAvanzada.TabIndex = 3;
+            this.checlBusquedaAvanzada.UseVisualStyleBackColor = true;
+            this.checlBusquedaAvanzada.CheckedChanged += new System.EventHandler(this.checlBusquedaAvanzada_CheckedChanged);
+            // 
+            // lbBusquedaAvanzada
+            // 
+            this.lbBusquedaAvanzada.AutoSize = true;
+            this.lbBusquedaAvanzada.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBusquedaAvanzada.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbBusquedaAvanzada.Location = new System.Drawing.Point(21, 43);
+            this.lbBusquedaAvanzada.Name = "lbBusquedaAvanzada";
+            this.lbBusquedaAvanzada.Size = new System.Drawing.Size(139, 16);
+            this.lbBusquedaAvanzada.TabIndex = 2;
+            this.lbBusquedaAvanzada.Text = "Busqueda Avanzada";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnSearch.Location = new System.Drawing.Point(21, 187);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Buscar";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtBoxSearch
+            // 
+            this.txtBoxSearch.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtBoxSearch.Location = new System.Drawing.Point(21, 16);
+            this.txtBoxSearch.MaxLength = 200;
+            this.txtBoxSearch.Name = "txtBoxSearch";
+            this.txtBoxSearch.Size = new System.Drawing.Size(268, 21);
+            this.txtBoxSearch.TabIndex = 0;
+            this.txtBoxSearch.Tag = "";
+            this.txtBoxSearch.TextChanged += new System.EventHandler(this.txtBoxSearch_TextChanged);
+            // 
             // panelSearchTitlle
             // 
             this.panelSearchTitlle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
@@ -298,137 +431,6 @@ namespace presentación
             this.lbSearchTitle.Size = new System.Drawing.Size(67, 16);
             this.lbSearchTitle.TabIndex = 0;
             this.lbSearchTitle.Text = "Buscador";
-            // 
-            // txtBoxSearch
-            // 
-            this.txtBoxSearch.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBoxSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtBoxSearch.Location = new System.Drawing.Point(21, 16);
-            this.txtBoxSearch.MaxLength = 200;
-            this.txtBoxSearch.Name = "txtBoxSearch";
-            this.txtBoxSearch.Size = new System.Drawing.Size(268, 21);
-            this.txtBoxSearch.TabIndex = 0;
-            this.txtBoxSearch.Tag = "";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnSearch.Location = new System.Drawing.Point(21, 187);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Buscar";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // lbBusquedaAvanzada
-            // 
-            this.lbBusquedaAvanzada.AutoSize = true;
-            this.lbBusquedaAvanzada.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBusquedaAvanzada.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbBusquedaAvanzada.Location = new System.Drawing.Point(21, 43);
-            this.lbBusquedaAvanzada.Name = "lbBusquedaAvanzada";
-            this.lbBusquedaAvanzada.Size = new System.Drawing.Size(139, 16);
-            this.lbBusquedaAvanzada.TabIndex = 2;
-            this.lbBusquedaAvanzada.Text = "Busqueda Avanzada";
-            // 
-            // checlBusquedaAvanzada
-            // 
-            this.checlBusquedaAvanzada.AutoSize = true;
-            this.checlBusquedaAvanzada.Location = new System.Drawing.Point(168, 45);
-            this.checlBusquedaAvanzada.Name = "checlBusquedaAvanzada";
-            this.checlBusquedaAvanzada.Size = new System.Drawing.Size(15, 14);
-            this.checlBusquedaAvanzada.TabIndex = 3;
-            this.checlBusquedaAvanzada.UseVisualStyleBackColor = true;
-            this.checlBusquedaAvanzada.CheckedChanged += new System.EventHandler(this.checlBusquedaAvanzada_CheckedChanged);
-            // 
-            // lbCampo
-            // 
-            this.lbCampo.AutoSize = true;
-            this.lbCampo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCampo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbCampo.Location = new System.Drawing.Point(21, 80);
-            this.lbCampo.Name = "lbCampo";
-            this.lbCampo.Size = new System.Drawing.Size(49, 14);
-            this.lbCampo.TabIndex = 4;
-            this.lbCampo.Text = "Campo";
-            // 
-            // lbCriterio
-            // 
-            this.lbCriterio.AutoSize = true;
-            this.lbCriterio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCriterio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbCriterio.Location = new System.Drawing.Point(171, 80);
-            this.lbCriterio.Name = "lbCriterio";
-            this.lbCriterio.Size = new System.Drawing.Size(52, 14);
-            this.lbCriterio.TabIndex = 5;
-            this.lbCriterio.Text = "Criterio";
-            // 
-            // lbMarca
-            // 
-            this.lbMarca.AutoSize = true;
-            this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMarca.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbMarca.Location = new System.Drawing.Point(24, 132);
-            this.lbMarca.Name = "lbMarca";
-            this.lbMarca.Size = new System.Drawing.Size(43, 14);
-            this.lbMarca.TabIndex = 6;
-            this.lbMarca.Text = "Marca";
-            // 
-            // lbCategoria
-            // 
-            this.lbCategoria.AutoSize = true;
-            this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbCategoria.Location = new System.Drawing.Point(171, 132);
-            this.lbCategoria.Name = "lbCategoria";
-            this.lbCategoria.Size = new System.Drawing.Size(66, 14);
-            this.lbCategoria.TabIndex = 7;
-            this.lbCategoria.Text = "Categoria";
-            // 
-            // cbCampo
-            // 
-            this.cbCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCampo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCampo.FormattingEnabled = true;
-            this.cbCampo.Location = new System.Drawing.Point(21, 97);
-            this.cbCampo.Name = "cbCampo";
-            this.cbCampo.Size = new System.Drawing.Size(121, 21);
-            this.cbCampo.TabIndex = 8;
-            this.cbCampo.SelectedIndexChanged += new System.EventHandler(this.cbCampo_SelectedIndexChanged);
-            // 
-            // cbCriterio
-            // 
-            this.cbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCriterio.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCriterio.FormattingEnabled = true;
-            this.cbCriterio.Location = new System.Drawing.Point(168, 97);
-            this.cbCriterio.Name = "cbCriterio";
-            this.cbCriterio.Size = new System.Drawing.Size(121, 21);
-            this.cbCriterio.TabIndex = 9;
-            // 
-            // cbCategoria
-            // 
-            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCategoria.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(169, 149);
-            this.cbCategoria.Name = "cbCategoria";
-            this.cbCategoria.Size = new System.Drawing.Size(121, 21);
-            this.cbCategoria.TabIndex = 10;
-            // 
-            // cbMarca
-            // 
-            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMarca.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(21, 149);
-            this.cbMarca.Name = "cbMarca";
-            this.cbMarca.Size = new System.Drawing.Size(121, 21);
-            this.cbMarca.TabIndex = 11;
             // 
             // frmPrincipal
             // 
