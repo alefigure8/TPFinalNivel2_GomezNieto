@@ -41,6 +41,7 @@ namespace presentación
                 cantidadEncontrada();
                 cargarComboBox();
 
+                //Panel busqueda avanzada tamaño minimozado
                 if (!checlBusquedaAvanzada.Checked)
                 {
                     panelSearch.Size = new Size(307, 75);
@@ -77,14 +78,14 @@ namespace presentación
             }
             catch (Exception e)
             {
-                throw e;
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
 
         public void cargarGridView(bool sort = false)
         {
             //OPCIONES GRID
-            dgvProductos.DataSource = listaProductos;
+            dgvProductos.DataSource = listaProductosAux;
             dgvProductos.Columns[Opciones.Campo.ID].Visible = false;
             dgvProductos.Columns[Opciones.Campo.URLIMAGEN].Visible = false;
             dgvProductos.EnableHeadersVisualStyles = false;
@@ -125,7 +126,7 @@ namespace presentación
             }
             catch (Exception e)
             {
-                throw e;
+                MessageBox.Show(Opciones.MensajeError.CAMPOVACIO);
             }
         }
 
@@ -258,6 +259,31 @@ namespace presentación
             }
         }
 
+        private bool validarNumeros()
+        {
+            string filtro = txtBoxSearch.Text;
+            string campo = cbCampo.SelectedItem.ToString();
+
+            if (campo == Opciones.Campo.PRECIO && (!int.TryParse(filtro, out int validate) || string.IsNullOrEmpty(filtro)))
+            {
+                MessageBox.Show(Opciones.MensajeError.MENSAJENUMERO);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool validarFiltro(System.Windows.Forms.ComboBox combo)
+        {
+            if (combo.SelectedIndex < 0)
+            {
+                MessageBox.Show(Opciones.MensajeError.CAMPOVACIO);
+                return true;
+            }
+
+            return false;
+        }
+
         //*****EVENTOS*****//
         private void comboBoxOrdenar_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -315,19 +341,79 @@ namespace presentación
         private void checlBusquedaAvanzada_CheckedChanged(object sender, EventArgs e)
         {
             if(checlBusquedaAvanzada.Checked)
-            {
                 panelSearch.Size = new Size(307, 228);
-
-            }
             else
-            {
                 panelSearch.Size = new Size(307, 75);
-            }
         }
 
         private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
             comboBoxCriterioBusquedaAvanzada();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+                ProductoNegocio productos = new ProductoNegocio();
+
+                string filtro = txtBoxSearch.Text;
+                string campo = cbCampo.SelectedItem.ToString();
+                string criterio = cbCriterio.SelectedItem.ToString();
+                string marca = cbMarca.SelectedItem.ToString() == "Todos" ? "" : cbMarca.SelectedItem.ToString();
+                string categoria = cbCategoria.SelectedItem.ToString() == "Todos" ? "" : cbCategoria.SelectedItem.ToString();
+
+            // Validar si es numero
+            if (validarNumeros())
+                return;
+
+            //Validar si los campos estan vacios
+            if (validarFiltro(cbCampo) || validarFiltro(cbCriterio))
+                return;
+
+            try
+            {
+                listaProductos = productos.busquedaAvanzada(filtro, campo, criterio, categoria, marca);
+                listaProductosAux = listaProductos;
+
+                //Poner pagina en cero
+                pagina = 0;
+
+                //Cargar Grid
+                cargarGridView(true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void txtBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (!checlBusquedaAvanzada.Checked)
+            {
+                ProductoNegocio productos = new ProductoNegocio();
+                string busqueda = txtBoxSearch.Text;
+
+                try
+                {
+                    if(string.IsNullOrEmpty(busqueda) || busqueda.Length > 3)
+                    {
+                        listaProductos =  productos.busquedaSimple(busqueda);
+                        listaProductosAux = listaProductos;
+                        //Poner pagina en cero
+                        pagina = 0;
+
+                        //Cargar Grid
+                        cargarGridView(true);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Opciones.MensajeError.LISTAERROR);
+                }
+
+
+            }
         }
     }
 }
