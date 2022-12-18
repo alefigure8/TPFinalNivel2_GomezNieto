@@ -14,7 +14,7 @@ namespace configuracion
             public const string NOMBRE = "Nombre";
             public const string DESCRIPCION = "Descripcion";
             public const string PRECIO = "Precio";
-            public const string CODIGO = "Código";
+            public const string CODIGO = "Codigo";
             public const string CATEGORIA = "Categoria";
             public const string MARCA = "Marca";
             public const string ID = "Id";
@@ -35,8 +35,8 @@ namespace configuracion
 
         public struct CriterioTexto
         {
-            public const string INCLUYE = "Incluye palabras";
-            public const string CONTIENE = "Contiene";
+            public const string INCLUYE = "Alguna Palabra";
+            public const string CONTIENE = "Palabra Exacta";
             public const string EMPIEZA = "Empieza con";
             public const string TERMINA = "Termina con";
         }
@@ -52,6 +52,9 @@ namespace configuracion
         {
             public const string LISTAERROR = "La lista no pudo cargarse";
             public const string PRODUCTOERROR = "Los productos no pudieron cargarse";
+            public const string MENSAJENUMERO = "Debe ingresar un número";
+            public const string CAMPOVACIO = "Por favor, seleccione una opción";
+            public const string ORDENARLISTADO = "No se pudo ordenar el listado";
         }
 
         public struct Paginacion
