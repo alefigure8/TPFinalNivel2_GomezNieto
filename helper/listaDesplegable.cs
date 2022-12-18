@@ -26,8 +26,9 @@ namespace helper
                 Opciones.Campo.NOMBRE,
                 Opciones.Campo.CODIGO,
                 Opciones.Campo.PRECIO,
-                Opciones.Campo.MARCA,
-                Opciones.Campo.CATEGORIA,
+                Opciones.Campo.DESCRIPCION,
+                //Opciones.Campo.MARCA,
+                //Opciones.Campo.CATEGORIA,
             };
             return columnasProductos;
         }
