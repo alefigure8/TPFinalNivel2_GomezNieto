@@ -279,6 +279,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\configuracion\configuracion.csproj">
+      <Project>{95fb165b-2054-4fdc-b799-e452d9f6d2cd}</Project>
+      <Name>configuracion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{8a88a3b2-5057-4b22-b793-f5ee1f741957}</Project>
       <Name>dominio</Name>
