@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using negocio;
 using dominio;
 using helper;
+using configuracion;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace presentación
@@ -19,15 +20,15 @@ namespace presentación
         private List<Producto> listaProductos = null;
         private List<Producto> listaProductosAux;
         int pagina;
+
         public frmPrincipal()
         {
             InitializeComponent();
+            pagina = 0;
 
             //Cargar las listas solo una vez
             if(listaProductos == null)
                 LoadfrmPrincipal();
-
-            pagina = 0;
         }
 
         //*****METODOS*****//
@@ -38,19 +39,27 @@ namespace presentación
                 listarProductos();
                 cargarGridView();
                 cantidadEncontrada();
-                comboBoxOrdenarPor();
-                comboBoxCantidad();
+                cargarComboBox();
 
                 if (!checlBusquedaAvanzada.Checked)
                 {
                     panelSearch.Size = new Size(307, 75);
-
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("No se pudo cargar los productos");
+                MessageBox.Show(Opciones.MensajeError.PRODUCTOERROR);
             }
+        }
+
+        private void cargarComboBox()
+        {
+            comboBoxOrdenarPor();
+            comboBoxCantidad();
+            comboBoxCamposBusquedaAvanzada();
+            comboBoxCriterioBusquedaAvanzada();
+            comboBoxMarca();
+            comboBoxCategoria();
         }
 
         private void cantidadEncontrada()
@@ -76,8 +85,8 @@ namespace presentación
         {
             //OPCIONES GRID
             dgvProductos.DataSource = listaProductos;
-            dgvProductos.Columns["Id"].Visible = false;
-            dgvProductos.Columns["ImagenUrl"].Visible = false;
+            dgvProductos.Columns[Opciones.Campo.ID].Visible = false;
+            dgvProductos.Columns[Opciones.Campo.URLIMAGEN].Visible = false;
             dgvProductos.EnableHeadersVisualStyles = false;
 
             //SORT
@@ -91,23 +100,23 @@ namespace presentación
             {
                 listaProductosAux = listaProductos;
 
-                if (comboBoxOrdenar.SelectedItem.ToString() == "Nombre")
+                if (comboBoxOrdenar.SelectedItem.ToString() == Opciones.Campo.NOMBRE)
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.Nombre).ToList();
                 }
-                else if (comboBoxOrdenar.SelectedItem.ToString() == "Marca")
+                else if (comboBoxOrdenar.SelectedItem.ToString() == Opciones.Campo.MARCA)
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.MarcaInfo.Descripcion).ToList();
                 }
-                else if (comboBoxOrdenar.SelectedItem.ToString() == "Categoria")
+                else if (comboBoxOrdenar.SelectedItem.ToString() == Opciones.Campo.CATEGORIA)
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.CategoriaInfo.Descripcion).ToList();
                 }
-                else if (comboBoxOrdenar.SelectedItem.ToString() == "Precio")
+                else if (comboBoxOrdenar.SelectedItem.ToString() == Opciones.Campo.PRECIO)
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.Precio).ToList();
                 }
-                else if (comboBoxOrdenar.SelectedItem.ToString() == "Codigo")
+                else if (comboBoxOrdenar.SelectedItem.ToString() == Opciones.Campo.CODIGO)
                 {
                     listaProductosAux = listaProductosAux.OrderBy(x => x.Codigo).ToList();
                 }
@@ -128,6 +137,39 @@ namespace presentación
             cantidadEncontrada();
         }
 
+       private void comboBoxCriterioBusquedaAvanzada()
+        {
+            try
+            {
+                listaDesplegable listaCriterio = new listaDesplegable();
+
+                if(cbCampo.Text == Opciones.Campo.PRECIO)
+                    cbCriterio.DataSource = listaCriterio.cargarBusquedaCriterioNumero();
+                else
+                    cbCriterio.DataSource = listaCriterio.cargarBusquedaCriterioTexto();
+
+                cbCriterio.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR); ;
+            }
+        }
+
+        private void comboBoxCamposBusquedaAvanzada()
+        {
+            try
+            {
+                listaDesplegable listaCampos = new listaDesplegable();
+                cbCampo.DataSource = listaCampos.cargarBusqueraColumnas();
+                cbCampo.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
+            }
+        }
+
         private void comboBoxOrdenarPor()
         {
             try
@@ -138,7 +180,7 @@ namespace presentación
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al cargar lista");
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
 
@@ -152,11 +194,38 @@ namespace presentación
             }
             catch (Exception)
             {
-                MessageBox.Show("Error al cargar lista");
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
 
-        private void paginacionProductos(string direccion = "adelante")
+        private void comboBoxMarca()
+        {
+            try
+            {
+                listaDesplegable listaMarca = new listaDesplegable();
+                cbMarca.DataSource = listaMarca.cargarMarcas();
+                cbMarca.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
+            }
+        }
+        private void comboBoxCategoria()
+        {
+            try
+            {
+                listaDesplegable listaCategoria = new listaDesplegable();
+                cbCategoria.DataSource = listaCategoria.cargarCategorias();
+                cbCategoria.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
+            }
+        }
+
+        private void paginacionProductos(string direccion = Opciones.PaginacionControl.ADELANTE)
         {
             int mostrar = Convert.ToInt32(comboBoxMostrarCantidad.SelectedItem);
             int total = listaProductos.Count() / mostrar;
@@ -164,7 +233,7 @@ namespace presentación
             if (pagina <= total && pagina >= 0)
             {
                 //Siguiente
-                if (direccion == "adelante")
+                if (direccion == Opciones.PaginacionControl.ADELANTE)
                 {
                     pagina++;
 
@@ -184,7 +253,7 @@ namespace presentación
                 var subset = listaProductosAux.Skip(mostrar * pagina).Take(mostrar).ToList();
 
                 //Render elementos
-                lbPaginas.Text = $"Página {pagina + 1}";
+                lbPaginas.Text = $"{Opciones.Paginacion.PAGINA} {pagina + 1}";
                 dgvProductos.DataSource = subset;
             }
         }
@@ -200,7 +269,7 @@ namespace presentación
         {
             pagina = 0;
             cargarGridView(true);
-            lbPaginas.Text = $"Página {pagina + 1}";
+            lbPaginas.Text = $"{Opciones.Paginacion.PAGINA} {pagina + 1}";
             mostrarPorCantidad();
         }
 
@@ -213,7 +282,7 @@ namespace presentación
         private void btnPreview_Click(object sender, EventArgs e)
         {
             //Pagina anterior
-            paginacionProductos("anterior");
+            paginacionProductos(Opciones.PaginacionControl.ATRAS);
         }
 
         private void btnLast_Click(object sender, EventArgs e)
@@ -254,6 +323,11 @@ namespace presentación
             {
                 panelSearch.Size = new Size(307, 75);
             }
+        }
+
+        private void cbCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxCriterioBusquedaAvanzada();
         }
     }
 }
