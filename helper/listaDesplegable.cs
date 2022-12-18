@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using negocio;
 using dominio;
+using configuracion;
 
 namespace helper
 {
@@ -22,11 +23,11 @@ namespace helper
         {
             columnasProductos = new List<string>()
             {
-                "Nombre",
-                "Codigo",
-                "Marca",
-                "Categoria",
-                "Precio"
+                Opciones.Campo.NOMBRE,
+                Opciones.Campo.CODIGO,
+                Opciones.Campo.PRECIO,
+                Opciones.Campo.MARCA,
+                Opciones.Campo.CATEGORIA,
             };
             return columnasProductos;
         }
@@ -35,10 +36,10 @@ namespace helper
         {
             cantidadPorPagina = new List<string>()
             {
-                "50",
-                "30",
-                "20",
-                "10"
+                Opciones.Numero.CINCUENTA,
+                Opciones.Numero.TREINTA,
+                Opciones.Numero.VEINTE,
+                Opciones.Numero.DIEZ,
             };
             return cantidadPorPagina;
         }
@@ -47,9 +48,9 @@ namespace helper
         {
             criterioBusquedaTexto = new List<string>()
             {
-                "Empieza con",
-                "Contiene",
-                "Incluye algunas"
+                Opciones.CriterioTexto.CONTIENE,
+                Opciones.CriterioTexto.INCLUYE,
+                Opciones.CriterioTexto.EMPIEZA,
             };
             return criterioBusquedaTexto;
         }
@@ -58,9 +59,9 @@ namespace helper
         {
             criterioBusquedaNumero = new List<string>()
             {
-                "Mayor a",
-                "Igual a",
-                "Menor a",
+                Opciones.CriterioNumero.IGUAL,
+                Opciones.CriterioNumero.MAYOR,
+                Opciones.CriterioNumero.MENOR
             };
             return criterioBusquedaNumero;
         }
@@ -71,8 +72,8 @@ namespace helper
             {
                 CategoriaNegocio categoriaLista = new CategoriaNegocio();
                 List<Categoria> aux = categoriaLista.listar();
-                categorias = new List<string>();
-
+                categorias = new List<string>(){ "Todos" };
+ 
                 foreach (Categoria categoria in aux)
                 {
                     categorias.Add(categoria.Descripcion);
@@ -92,7 +93,7 @@ namespace helper
             {
                 MarcaNegocio marcaLista = new MarcaNegocio();
                 List<Marca> aux = marcaLista.listar();
-                marcas = new List<string>();
+                marcas = new List<string>(){"Todos"};
 
                 foreach (Marca categoria in aux)
                 {
