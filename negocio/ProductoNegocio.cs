@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using dominio;
 using configuracion;
+using static System.Net.Mime.MediaTypeNames;
+using System.Data.SqlTypes;
+using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace negocio
 {
@@ -61,7 +65,7 @@ namespace negocio
             }
         }
 
-        public List<Producto> busquedaAvanzada(string filtro, string campo, string criterio)
+        public List<Producto> busquedaAvanzada(string filtro, string campo, string criterio, string categoria, string marca)
         {
             List<Producto> listaProducto = new List<Producto>();
             AccesoDB datoSQL = new AccesoDB();
@@ -70,10 +74,9 @@ namespace negocio
             {
                 string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdMarca, A.IdCategoria, C.Descripcion as CategoriaDescripcion, M.Descripcion as MarcaDescripcion, A.Precio " +
                     "from ARTICULOS A, CATEGORIAS C, MARCAS M " +
-                    "where A.IdCategoria = C.Id AND A.IdMarca = M.Id" +
-                    $"AND ";
+                    "where A.IdCategoria = C.Id AND A.IdMarca = M.Id " +
+                    $"AND M.Descripcion LIKE '%{marca}%' AND C.Descripcion LIKE '%{categoria}%' ";
 
-                //switch
                 switch(campo)
                 {
                     case Opciones.Campo.NOMBRE:
@@ -81,16 +84,41 @@ namespace negocio
                             switch(criterio)
                             {
                                 case Opciones.CriterioTexto.CONTIENE:
-                                    query += $"A.Nombre LIKE '%{filtro}%'";
+                                    query += $"AND A.Nombre LIKE '%{filtro}%'";
                                     break;
                                 case Opciones.CriterioTexto.EMPIEZA:
-                                    query += $"A.Nombre LIKE '{filtro}%'";
+                                    query += $"AND A.Nombre LIKE '{filtro}%'";
                                     break;
-                                case Opciones.CriterioTexto.TERMINA:
-                                    query += $"A.Nombre LIKE '%{filtro}'";
+                                case Opciones.CriterioTexto.INCLUYE:
+                                    {
+                                        bool encontrado = false;
+                                        string[] vFiltro = filtro.Split(' ');
+
+                                        foreach(string item in vFiltro)
+                                        {
+                                            datoSQL.setQuery($"select Nombre from ARTICULOS where Nombre LIKE '%{item}%'");
+                                            datoSQL.executeReader();
+
+                                            if (datoSQL.Reader.HasRows)
+                                            {
+                                                query += $"AND A.Nombre LIKE '%{item}%'";
+                                                encontrado= true;
+                                                break;  
+                                            }
+
+                                            datoSQL.closeConnection();
+                                        }
+
+                                        if(!encontrado)
+                                        {
+                                            query += $"AND A.Nombre LIKE '%{filtro}%'";
+                                        }
+
+                                        datoSQL.closeConnection();
+                                    }
                                     break;
                                 default:
-                                    query += $"A.Nombre LIKE '%'";
+                                    query += $"";
                                     break;
                             }
                         }
@@ -100,73 +128,142 @@ namespace negocio
                             switch(criterio)
                             {
                                 case Opciones.CriterioTexto.CONTIENE:
-                                    query += $"A.Codigo LIKE '%{filtro}%'";
+                                    query += $"AND A.Codigo LIKE '%{filtro}%'";
                                     break;
                                 case Opciones.CriterioTexto.EMPIEZA:
-                                    query += $"A.Codigo LIKE '{filtro}%'";
+                                    query += $"AND A.Codigo LIKE '{filtro}%'";
                                     break;
-                                case Opciones.CriterioTexto.TERMINA:
-                                    query += $"A.Codigo LIKE '%{filtro}'";
+                                case Opciones.CriterioTexto.INCLUYE:
+                                    {
+                                        bool encontrado = false;
+                                        string[] vFiltro = filtro.Split(' ');
+
+                                        foreach (string item in vFiltro)
+                                        {
+                                            datoSQL.setQuery($"select Codigo from ARTICULOS where Codigo LIKE '%{item}%'");
+                                            datoSQL.executeReader();
+
+                                            if (datoSQL.Reader.HasRows)
+                                            {
+                                                query += $"AND A.Codigo LIKE '%{item}%'";
+                                                encontrado = true;
+                                                break;
+                                            }
+
+                                            datoSQL.closeConnection();
+                                        }
+
+                                        if (!encontrado)
+                                        {
+                                            query += $"AND A.Codigo LIKE '%{filtro}%'";
+                                        }
+
+                                        datoSQL.closeConnection();
+                                    }
                                     break;
                                 default:
-                                    query += $"A.Codigo LIKE '%'";
+                                    query += $"";
                                     break;
                             }
                         }
                         break;
-                    case Opciones.Campo.MARCA:
+                    case Opciones.Campo.DESCRIPCION:
                         {
                             switch (criterio)
                             {
                                 case Opciones.CriterioTexto.CONTIENE:
-                                    query += $"M.Descripcion LIKE '%{filtro}%'";
+                                    query += $"AND A.Descripcion LIKE '%{filtro}%'";
                                     break;
                                 case Opciones.CriterioTexto.EMPIEZA:
-                                    query += $"M.Descripcion LIKE '{filtro}%'";
+                                    query += $"AND A.Descripcion LIKE '{filtro}%'";
                                     break;
-                                case Opciones.CriterioTexto.TERMINA:
-                                    query += $"M.Descripcion LIKE '%{filtro}'";
+                                case Opciones.CriterioTexto.INCLUYE:
+                                    {
+                                        bool encontrado = false;
+                                        string[] vFiltro = filtro.Split(' ');
+
+                                        foreach (string item in vFiltro)
+                                        {
+                                            datoSQL.setQuery($"select Descripcion from ARTICULOS where Descripcion LIKE '%{item}%'");
+                                            datoSQL.executeReader();
+
+                                            if (datoSQL.Reader.HasRows)
+                                            {
+                                                query += $"AND A.Descripcion LIKE '%{item}%'";
+                                                encontrado = true;
+                                                break;
+                                            }
+
+                                            datoSQL.closeConnection();
+                                        }
+
+                                        if (!encontrado)
+                                        {
+                                            query += $"AND A.Descripcion LIKE '%{filtro}%'";
+                                        }
+
+                                        datoSQL.closeConnection();
+                                    }
                                     break;
                                 default:
-                                    query += $"M.Descripcion LIKE '%'";
+                                    query += $"";
                                     break;
                             }
                         }
                         break;
-                    case Opciones.Campo.CATEGORIA:
-                        {
-                            switch (criterio)
-                            {
-                                case Opciones.CriterioTexto.CONTIENE:
-                                    query += $"C.Descripcion LIKE '%{filtro}%'";
-                                    break;
-                                case Opciones.CriterioTexto.EMPIEZA:
-                                    query += $"C.Descripcion LIKE '{filtro}%'";
-                                    break;
-                                case Opciones.CriterioTexto.TERMINA:
-                                    query += $"C.Descripcion LIKE '%{filtro}'";
-                                    break;
-                                default:
-                                    query += $"C.Descripcion LIKE '%'";
-                                    break;
-                            }
-                        }
-                        break;
+                    //case Opciones.Campo.MARCA:
+                    //    {
+                    //        switch (criterio)
+                    //        {
+                    //            case Opciones.CriterioTexto.CONTIENE:
+                    //                query += $"AND M.Descripcion LIKE '%{filtro}%'";
+                    //                break;
+                    //            case Opciones.CriterioTexto.EMPIEZA:
+                    //                query += $"AND M.Descripcion LIKE '{filtro}%'";
+                    //                break;
+                    //            case Opciones.CriterioTexto.TERMINA:
+                    //                query += $"AND M.Descripcion LIKE '%{filtro}'";
+                    //                break;
+                    //            default:
+                    //                query += $"";
+                    //                break;
+                    //        }
+                    //    }
+                    //    break;
+                    //case Opciones.Campo.CATEGORIA:
+                    //    {
+                    //        switch (criterio)
+                    //        {
+                    //            case Opciones.CriterioTexto.CONTIENE:
+                    //                query += $"AND C.Descripcion LIKE '%{filtro}%'";
+                    //                break;
+                    //            case Opciones.CriterioTexto.EMPIEZA:
+                    //                query += $"AND C.Descripcion LIKE '{filtro}%'";
+                    //                break;
+                    //            case Opciones.CriterioTexto.TERMINA:
+                    //                query += $"AND C.Descripcion LIKE '%{filtro}'";
+                    //                break;
+                    //            default:
+                    //                query += $"";
+                    //                break;
+                    //        }
+                    //    }
+                    //    break;
                     case Opciones.Campo.PRECIO:
                         {
                             switch (criterio)
                             {
                                 case Opciones.CriterioNumero.MAYOR:
-                                    query += $"A.Precio > {filtro}";
+                                    query += $"AND A.Precio > {filtro}";
                                     break;
                                 case Opciones.CriterioNumero.MENOR:
-                                    query += $"A.Precio < {filtro}";
+                                    query += $"AND A.Precio < {filtro}";
                                     break;
                                 case Opciones.CriterioNumero.IGUAL:
-                                    query += $"A.Precio = {filtro}";
+                                    query += $"AND A.Precio = {filtro}";
                                     break;
                                 default:
-                                    query += $"A.Precio = '%'";
+                                    query += $"";
                                     break;
                             }
                         }
@@ -203,19 +300,89 @@ namespace negocio
 
                     listaProducto.Add(aux);
                 }
+
+                return listaProducto;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
             {
                 datoSQL.closeConnection();
             }
+        }
 
+        public List<Producto> busquedaSimple(string filtro)
+        {
+            List<Producto> listaProducto = new List<Producto>();
+            AccesoDB datoSQL = new AccesoDB();
 
-            return listaProductos;
+            try
+            {
+                string query =
+                    "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdMarca, A.IdCategoria, C.Descripcion as CategoriaDescripcion, M.Descripcion as MarcaDescripcion, A.Precio " +
+                    "from ARTICULOS A, CATEGORIAS C, MARCAS M " +
+                    "where  A.IdCategoria = C.Id AND A.IdMarca = M.Id ";
+                bool encontrado = false;
+                string[] vFiltro = filtro.Split(' ');
+
+                foreach (string item in vFiltro)
+                {
+                    datoSQL.setQuery($"SELECT Nombre FROM ARTICULOS WHERE Nombre LIKE '%{item}%' ");
+                    datoSQL.executeReader();
+
+                    if (datoSQL.Reader.HasRows)
+                    {
+                        Console.WriteLine("Entra " + item);
+                        query += $"AND A.Nombre LIKE '%{item}%'";
+                        encontrado = true;
+                        datoSQL.closeConnection();
+                        break;
+                    }
+
+                    datoSQL.closeConnection();
+                }
+
+                if (!encontrado)
+                {
+                    query += $"AND A.Nombre LIKE '%{filtro}%'";
+                }
+                Console.WriteLine(query);
+
+                datoSQL.setQuery(query);
+                datoSQL.executeReader();
+
+                while (datoSQL.Reader.Read())
+                {
+                    Producto aux = new Producto();
+
+                    //***** PRODUCTO ***** //
+                    aux.Id = (int)datoSQL.Reader[Opciones.Campo.ID];
+                    aux.Codigo = (string)datoSQL.Reader[Opciones.Campo.CODIGO];
+                    aux.Nombre = (string)datoSQL.Reader[Opciones.Campo.NOMBRE];
+                    aux.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCRIPCION];
+                    aux.Precio = (decimal)datoSQL.Reader[Opciones.Campo.PRECIO];
+                    aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
+
+                    //**** MARCA ***** //
+                    aux.MarcaInfo = new Marca();
+                    aux.MarcaInfo.Id = (int)datoSQL.Reader[Opciones.Campo.IDMARCA];
+                    aux.MarcaInfo.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCMARCA];
+
+                    //**** CATEGORIA ***** ///
+                    aux.CategoriaInfo = new Categoria();
+                    aux.CategoriaInfo.Id = (int)datoSQL.Reader[Opciones.Campo.IDCATEGORIA];
+                    aux.CategoriaInfo.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCCATEGORIA];
+
+                    listaProducto.Add(aux);
+                }
+                return listaProducto;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
