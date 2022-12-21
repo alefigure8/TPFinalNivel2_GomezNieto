@@ -51,10 +51,19 @@ namespace configuracion
         public struct MensajeError
         {
             public const string LISTAERROR = "La lista no pudo cargarse";
+            public const string MARCAERROR = "La lista de marcas no pudo cargarse";
             public const string PRODUCTOERROR = "Los productos no pudieron cargarse";
             public const string MENSAJENUMERO = "Debe ingresar un número";
             public const string CAMPOVACIO = "Por favor, seleccione una opción";
             public const string ORDENARLISTADO = "No se pudo ordenar el listado";
+            public const string ERRORCARGAMARCA = "Error al cargar en Marca";
+            public const string MARCAYAEXISTE = "La Marca ya existe";
+            public const string CAMPOVACIOTEXTO = "Debe completar el campo antes de enviar";
+        }
+
+        public struct MensajeExito
+        {
+            public const string EXITOCARGARMENSAJE = "La marca se agregó con éxito";
         }
 
         public struct Paginacion
@@ -68,6 +77,13 @@ namespace configuracion
         {
             public const string ADELANTE = "adealnte";
             public const string ATRAS = "anterior";
+        }
+
+        public struct DBTablas
+        {
+            public const string MARCAS = "MARCAS";
+            public const string CATEGORIAS = "CATEGORIAS";
+            public const string ARTICULOS = "ARTICULOS";
         }
     }
 }
