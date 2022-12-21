@@ -23,7 +23,7 @@ namespace negocio
             {
                 datoSQL.setQuery(
                     "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdMarca, A.IdCategoria, C.Descripcion as CategoriaDescripcion, M.Descripcion as MarcaDescripcion, A.Precio " +
-                    "from ARTICULOS A, CATEGORIAS C, MARCAS M " +
+                    $"from {Opciones.DBTablas.ARTICULOS} A, {Opciones.DBTablas.CATEGORIAS} C, {Opciones.DBTablas.MARCAS} M " +
                     "where A.IdCategoria = C.Id AND A.IdMarca = M.Id"
                     );
                 datoSQL.executeReader();
@@ -73,7 +73,7 @@ namespace negocio
             try
             {
                 string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.IdMarca, A.IdCategoria, C.Descripcion as CategoriaDescripcion, M.Descripcion as MarcaDescripcion, A.Precio " +
-                    "from ARTICULOS A, CATEGORIAS C, MARCAS M " +
+                    $"from {Opciones.DBTablas.ARTICULOS} A, {Opciones.DBTablas.CATEGORIAS} C, {Opciones.DBTablas.MARCAS} M " +
                     "where A.IdCategoria = C.Id AND A.IdMarca = M.Id " +
                     $"AND M.Descripcion LIKE '%{marca}%' AND C.Descripcion LIKE '%{categoria}%' ";
 
@@ -382,6 +382,31 @@ namespace negocio
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool existeMarca(string keyword)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+
+            try
+            {
+                datoSQL.setQuery($"SELECT * FROM {Opciones.DBTablas.ARTICULOS} WHERE {Opciones.Campo.DESCRIPCION} = '{keyword}'");
+                datoSQL.executeReader();
+
+                if (datoSQL.Reader.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datoSQL.closeConnection();
             }
         }
     }
