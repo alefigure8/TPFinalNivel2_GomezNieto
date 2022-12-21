@@ -65,6 +65,38 @@ namespace negocio
             }
         }
 
+        public bool agregar (Producto producto)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+
+            try
+            {
+                datoSQL.setQuery
+                 (
+                    $"INSERT INTO {Opciones.DBTablas.ARTICULOS} " +
+                    $"({Opciones.Campo.CODIGO}, {Opciones.Campo.NOMBRE}, {Opciones.Campo.DESCRIPCION}, {Opciones.Campo.IDMARCA}, {Opciones.Campo.IDCATEGORIA}, {Opciones.Campo.URLIMAGEN}, {Opciones.Campo.PRECIO}) " +
+                    $"VALUES('{producto.Codigo}', '{producto.Nombre}', '{producto.Descripcion}', '{producto.MarcaInfo.Id}', '{producto.CategoriaInfo.Id}', '{producto.ImagenURL}', {producto.Precio})"
+                );
+
+                if (datoSQL.executeNonQuery())
+                {
+                    datoSQL.closeConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally 
+            { 
+                datoSQL.closeConnection(); 
+            }
+
+            return false;
+        }
+
         public List<Producto> busquedaAvanzada(string filtro, string campo, string criterio, string categoria, string marca)
         {
             List<Producto> listaProducto = new List<Producto>();
