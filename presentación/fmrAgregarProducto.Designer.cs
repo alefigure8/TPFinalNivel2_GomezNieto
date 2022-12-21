@@ -31,24 +31,48 @@
             this.lbTituloCargarProducto = new System.Windows.Forms.Label();
             this.panelCargaProducto = new System.Windows.Forms.Panel();
             this.lbAgregarCodigo = new System.Windows.Forms.Label();
-            this.lbAgregarCategoria = new System.Windows.Forms.Label();
             this.panelCargarCategoria = new System.Windows.Forms.Panel();
             this.cbAgregarcategoria = new System.Windows.Forms.ComboBox();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.panelCargarMarca = new System.Windows.Forms.Panel();
             this.cbAgregarMarca = new System.Windows.Forms.ComboBox();
             this.btnAgregarMarca = new System.Windows.Forms.Button();
-            this.panelTituloCargarCategoria = new System.Windows.Forms.Panel();
             this.panelTituloCargarMarcar = new System.Windows.Forms.Panel();
             this.lbAgregarMarca = new System.Windows.Forms.Label();
             this.pbCargarProducto = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAgregarProducto = new System.Windows.Forms.Button();
+            this.lbAgregarArticulo = new System.Windows.Forms.Label();
+            this.lbAgregarDescripcion = new System.Windows.Forms.Label();
+            this.lbAgregarPrecio = new System.Windows.Forms.Label();
+            this.lbAgregarImagen = new System.Windows.Forms.Label();
+            this.lbMarca = new System.Windows.Forms.Label();
+            this.lbCategoria = new System.Windows.Forms.Label();
+            this.txtAgregarCodigo = new System.Windows.Forms.TextBox();
+            this.txtAgregarArticulo = new System.Windows.Forms.TextBox();
+            this.txtAgregarDescripcion = new System.Windows.Forms.TextBox();
+            this.txtAgregarPrecio = new System.Windows.Forms.TextBox();
+            this.txtAgregarImagen = new System.Windows.Forms.TextBox();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
+            this.cbMarca = new System.Windows.Forms.ComboBox();
+            this.cbCategoria = new System.Windows.Forms.ComboBox();
+            this.lbImagen = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbAgregarCategoria = new System.Windows.Forms.Label();
+            this.panelTituloCargarCategoria = new System.Windows.Forms.Panel();
+            this.lbErrorPrecio = new System.Windows.Forms.Label();
+            this.lbErrorDescripcion = new System.Windows.Forms.Label();
+            this.lbErrorArticulo = new System.Windows.Forms.Label();
+            this.lbErrorCodigo = new System.Windows.Forms.Label();
             this.panelCargaProducto.SuspendLayout();
             this.panelCargarCategoria.SuspendLayout();
             this.panelCargarMarca.SuspendLayout();
-            this.panelTituloCargarCategoria.SuspendLayout();
             this.panelTituloCargarMarcar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCargarProducto)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panelTituloCargarCategoria.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbTituloCargarProducto
@@ -65,10 +89,28 @@
             // panelCargaProducto
             // 
             this.panelCargaProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panelCargaProducto.Controls.Add(this.lbErrorCodigo);
+            this.panelCargaProducto.Controls.Add(this.lbErrorArticulo);
+            this.panelCargaProducto.Controls.Add(this.lbErrorDescripcion);
+            this.panelCargaProducto.Controls.Add(this.lbErrorPrecio);
+            this.panelCargaProducto.Controls.Add(this.cbCategoria);
+            this.panelCargaProducto.Controls.Add(this.cbMarca);
+            this.panelCargaProducto.Controls.Add(this.btnAgregarImagen);
+            this.panelCargaProducto.Controls.Add(this.txtAgregarImagen);
+            this.panelCargaProducto.Controls.Add(this.txtAgregarPrecio);
+            this.panelCargaProducto.Controls.Add(this.txtAgregarDescripcion);
+            this.panelCargaProducto.Controls.Add(this.txtAgregarArticulo);
+            this.panelCargaProducto.Controls.Add(this.txtAgregarCodigo);
+            this.panelCargaProducto.Controls.Add(this.lbCategoria);
+            this.panelCargaProducto.Controls.Add(this.lbMarca);
+            this.panelCargaProducto.Controls.Add(this.lbAgregarImagen);
+            this.panelCargaProducto.Controls.Add(this.lbAgregarPrecio);
+            this.panelCargaProducto.Controls.Add(this.lbAgregarDescripcion);
+            this.panelCargaProducto.Controls.Add(this.lbAgregarArticulo);
             this.panelCargaProducto.Controls.Add(this.lbAgregarCodigo);
             this.panelCargaProducto.Location = new System.Drawing.Point(42, 91);
             this.panelCargaProducto.Name = "panelCargaProducto";
-            this.panelCargaProducto.Size = new System.Drawing.Size(411, 238);
+            this.panelCargaProducto.Size = new System.Drawing.Size(371, 238);
             this.panelCargaProducto.TabIndex = 1;
             // 
             // lbAgregarCodigo
@@ -77,31 +119,20 @@
             this.lbAgregarCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbAgregarCodigo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbAgregarCodigo.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbAgregarCodigo.Location = new System.Drawing.Point(19, 8);
+            this.lbAgregarCodigo.Location = new System.Drawing.Point(53, 22);
             this.lbAgregarCodigo.Name = "lbAgregarCodigo";
             this.lbAgregarCodigo.Size = new System.Drawing.Size(50, 16);
             this.lbAgregarCodigo.TabIndex = 0;
             this.lbAgregarCodigo.Text = "Código";
-            // 
-            // lbAgregarCategoria
-            // 
-            this.lbAgregarCategoria.AutoSize = true;
-            this.lbAgregarCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAgregarCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbAgregarCategoria.Location = new System.Drawing.Point(85, 4);
-            this.lbAgregarCategoria.Name = "lbAgregarCategoria";
-            this.lbAgregarCategoria.Size = new System.Drawing.Size(128, 16);
-            this.lbAgregarCategoria.TabIndex = 1;
-            this.lbAgregarCategoria.Text = "Agregar Categoría";
             // 
             // panelCargarCategoria
             // 
             this.panelCargarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
             this.panelCargarCategoria.Controls.Add(this.cbAgregarcategoria);
             this.panelCargarCategoria.Controls.Add(this.btnAgregarCategoria);
-            this.panelCargarCategoria.Location = new System.Drawing.Point(632, 115);
+            this.panelCargarCategoria.Location = new System.Drawing.Point(633, 115);
             this.panelCargarCategoria.Name = "panelCargarCategoria";
-            this.panelCargarCategoria.Size = new System.Drawing.Size(291, 92);
+            this.panelCargarCategoria.Size = new System.Drawing.Size(290, 92);
             this.panelCargarCategoria.TabIndex = 2;
             // 
             // cbAgregarcategoria
@@ -135,9 +166,9 @@
             this.panelCargarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
             this.panelCargarMarca.Controls.Add(this.cbAgregarMarca);
             this.panelCargarMarca.Controls.Add(this.btnAgregarMarca);
-            this.panelCargarMarca.Location = new System.Drawing.Point(632, 237);
+            this.panelCargarMarca.Location = new System.Drawing.Point(633, 237);
             this.panelCargarMarca.Name = "panelCargarMarca";
-            this.panelCargarMarca.Size = new System.Drawing.Size(291, 92);
+            this.panelCargarMarca.Size = new System.Drawing.Size(290, 92);
             this.panelCargarMarca.TabIndex = 3;
             // 
             // cbAgregarMarca
@@ -166,15 +197,6 @@
             this.btnAgregarMarca.UseVisualStyleBackColor = false;
             this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
             // 
-            // panelTituloCargarCategoria
-            // 
-            this.panelTituloCargarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
-            this.panelTituloCargarCategoria.Controls.Add(this.lbAgregarCategoria);
-            this.panelTituloCargarCategoria.Location = new System.Drawing.Point(633, 91);
-            this.panelTituloCargarCategoria.Name = "panelTituloCargarCategoria";
-            this.panelTituloCargarCategoria.Size = new System.Drawing.Size(290, 24);
-            this.panelTituloCargarCategoria.TabIndex = 4;
-            // 
             // panelTituloCargarMarcar
             // 
             this.panelTituloCargarMarcar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
@@ -197,9 +219,10 @@
             // 
             // pbCargarProducto
             // 
-            this.pbCargarProducto.Location = new System.Drawing.Point(460, 91);
+            this.pbCargarProducto.Location = new System.Drawing.Point(11, 19);
             this.pbCargarProducto.Name = "pbCargarProducto";
-            this.pbCargarProducto.Size = new System.Drawing.Size(166, 173);
+            this.pbCargarProducto.Size = new System.Drawing.Size(185, 171);
+            this.pbCargarProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCargarProducto.TabIndex = 6;
             this.pbCargarProducto.TabStop = false;
             // 
@@ -220,14 +243,267 @@
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnAgregarProducto
+            // 
+            this.btnAgregarProducto.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAgregarProducto.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAgregarProducto.FlatAppearance.BorderSize = 0;
+            this.btnAgregarProducto.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.btnAgregarProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
+            this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarProducto.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarProducto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnAgregarProducto.Location = new System.Drawing.Point(135, 335);
+            this.btnAgregarProducto.Name = "btnAgregarProducto";
+            this.btnAgregarProducto.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregarProducto.TabIndex = 15;
+            this.btnAgregarProducto.Text = "Agregar";
+            this.btnAgregarProducto.UseVisualStyleBackColor = false;
+            this.btnAgregarProducto.Click += new System.EventHandler(this.btnAgregarProducto_Click);
+            // 
+            // lbAgregarArticulo
+            // 
+            this.lbAgregarArticulo.AutoSize = true;
+            this.lbAgregarArticulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbAgregarArticulo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAgregarArticulo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbAgregarArticulo.Location = new System.Drawing.Point(45, 52);
+            this.lbAgregarArticulo.Name = "lbAgregarArticulo";
+            this.lbAgregarArticulo.Size = new System.Drawing.Size(58, 16);
+            this.lbAgregarArticulo.TabIndex = 1;
+            this.lbAgregarArticulo.Text = "Articulo";
+            // 
+            // lbAgregarDescripcion
+            // 
+            this.lbAgregarDescripcion.AutoSize = true;
+            this.lbAgregarDescripcion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbAgregarDescripcion.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAgregarDescripcion.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbAgregarDescripcion.Location = new System.Drawing.Point(22, 81);
+            this.lbAgregarDescripcion.Name = "lbAgregarDescripcion";
+            this.lbAgregarDescripcion.Size = new System.Drawing.Size(81, 16);
+            this.lbAgregarDescripcion.TabIndex = 2;
+            this.lbAgregarDescripcion.Text = "Descripción";
+            // 
+            // lbAgregarPrecio
+            // 
+            this.lbAgregarPrecio.AutoSize = true;
+            this.lbAgregarPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbAgregarPrecio.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAgregarPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbAgregarPrecio.Location = new System.Drawing.Point(56, 110);
+            this.lbAgregarPrecio.Name = "lbAgregarPrecio";
+            this.lbAgregarPrecio.Size = new System.Drawing.Size(47, 16);
+            this.lbAgregarPrecio.TabIndex = 3;
+            this.lbAgregarPrecio.Text = "Precio";
+            // 
+            // lbAgregarImagen
+            // 
+            this.lbAgregarImagen.AutoSize = true;
+            this.lbAgregarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbAgregarImagen.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAgregarImagen.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbAgregarImagen.Location = new System.Drawing.Point(48, 199);
+            this.lbAgregarImagen.Name = "lbAgregarImagen";
+            this.lbAgregarImagen.Size = new System.Drawing.Size(55, 16);
+            this.lbAgregarImagen.TabIndex = 4;
+            this.lbAgregarImagen.Text = "Imagen";
+            // 
+            // lbMarca
+            // 
+            this.lbMarca.AutoSize = true;
+            this.lbMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMarca.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbMarca.Location = new System.Drawing.Point(56, 139);
+            this.lbMarca.Name = "lbMarca";
+            this.lbMarca.Size = new System.Drawing.Size(47, 16);
+            this.lbMarca.TabIndex = 5;
+            this.lbMarca.Text = "Marca";
+            // 
+            // lbCategoria
+            // 
+            this.lbCategoria.AutoSize = true;
+            this.lbCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbCategoria.Location = new System.Drawing.Point(33, 169);
+            this.lbCategoria.Name = "lbCategoria";
+            this.lbCategoria.Size = new System.Drawing.Size(70, 16);
+            this.lbCategoria.TabIndex = 6;
+            this.lbCategoria.Text = "Categoria";
+            // 
+            // txtAgregarCodigo
+            // 
+            this.txtAgregarCodigo.Location = new System.Drawing.Point(110, 21);
+            this.txtAgregarCodigo.Name = "txtAgregarCodigo";
+            this.txtAgregarCodigo.Size = new System.Drawing.Size(205, 20);
+            this.txtAgregarCodigo.TabIndex = 7;
+            // 
+            // txtAgregarArticulo
+            // 
+            this.txtAgregarArticulo.Location = new System.Drawing.Point(110, 51);
+            this.txtAgregarArticulo.Name = "txtAgregarArticulo";
+            this.txtAgregarArticulo.Size = new System.Drawing.Size(205, 20);
+            this.txtAgregarArticulo.TabIndex = 8;
+            // 
+            // txtAgregarDescripcion
+            // 
+            this.txtAgregarDescripcion.Location = new System.Drawing.Point(110, 80);
+            this.txtAgregarDescripcion.Name = "txtAgregarDescripcion";
+            this.txtAgregarDescripcion.Size = new System.Drawing.Size(205, 20);
+            this.txtAgregarDescripcion.TabIndex = 9;
+            // 
+            // txtAgregarPrecio
+            // 
+            this.txtAgregarPrecio.Location = new System.Drawing.Point(110, 109);
+            this.txtAgregarPrecio.Name = "txtAgregarPrecio";
+            this.txtAgregarPrecio.Size = new System.Drawing.Size(205, 20);
+            this.txtAgregarPrecio.TabIndex = 10;
+            // 
+            // txtAgregarImagen
+            // 
+            this.txtAgregarImagen.Location = new System.Drawing.Point(110, 199);
+            this.txtAgregarImagen.Name = "txtAgregarImagen";
+            this.txtAgregarImagen.Size = new System.Drawing.Size(205, 20);
+            this.txtAgregarImagen.TabIndex = 11;
+            // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnAgregarImagen.FlatAppearance.BorderSize = 0;
+            this.btnAgregarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarImagen.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarImagen.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAgregarImagen.Location = new System.Drawing.Point(321, 197);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(27, 23);
+            this.btnAgregarImagen.TabIndex = 8;
+            this.btnAgregarImagen.Text = "...";
+            this.btnAgregarImagen.UseVisualStyleBackColor = false;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
+            // cbMarca
+            // 
+            this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMarca.FormattingEnabled = true;
+            this.cbMarca.Location = new System.Drawing.Point(110, 138);
+            this.cbMarca.Name = "cbMarca";
+            this.cbMarca.Size = new System.Drawing.Size(205, 21);
+            this.cbMarca.TabIndex = 12;
+            // 
+            // cbCategoria
+            // 
+            this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategoria.FormattingEnabled = true;
+            this.cbCategoria.Location = new System.Drawing.Point(110, 168);
+            this.cbCategoria.Name = "cbCategoria";
+            this.cbCategoria.Size = new System.Drawing.Size(205, 21);
+            this.cbCategoria.TabIndex = 13;
+            // 
+            // lbImagen
+            // 
+            this.lbImagen.AutoSize = true;
+            this.lbImagen.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbImagen.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbImagen.Location = new System.Drawing.Point(70, 4);
+            this.lbImagen.Name = "lbImagen";
+            this.lbImagen.Size = new System.Drawing.Size(55, 16);
+            this.lbImagen.TabIndex = 1;
+            this.lbImagen.Text = "Imagen";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
+            this.panel1.Controls.Add(this.lbImagen);
+            this.panel1.Location = new System.Drawing.Point(419, 91);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(207, 24);
+            this.panel1.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panel2.Controls.Add(this.pbCargarProducto);
+            this.panel2.Location = new System.Drawing.Point(418, 115);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(208, 214);
+            this.panel2.TabIndex = 5;
+            // 
+            // lbAgregarCategoria
+            // 
+            this.lbAgregarCategoria.AutoSize = true;
+            this.lbAgregarCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbAgregarCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbAgregarCategoria.Location = new System.Drawing.Point(85, 4);
+            this.lbAgregarCategoria.Name = "lbAgregarCategoria";
+            this.lbAgregarCategoria.Size = new System.Drawing.Size(128, 16);
+            this.lbAgregarCategoria.TabIndex = 1;
+            this.lbAgregarCategoria.Text = "Agregar Categoría";
+            // 
+            // panelTituloCargarCategoria
+            // 
+            this.panelTituloCargarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
+            this.panelTituloCargarCategoria.Controls.Add(this.lbAgregarCategoria);
+            this.panelTituloCargarCategoria.Location = new System.Drawing.Point(633, 91);
+            this.panelTituloCargarCategoria.Name = "panelTituloCargarCategoria";
+            this.panelTituloCargarCategoria.Size = new System.Drawing.Size(290, 24);
+            this.panelTituloCargarCategoria.TabIndex = 4;
+            // 
+            // lbErrorPrecio
+            // 
+            this.lbErrorPrecio.AutoSize = true;
+            this.lbErrorPrecio.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorPrecio.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorPrecio.Location = new System.Drawing.Point(322, 111);
+            this.lbErrorPrecio.Name = "lbErrorPrecio";
+            this.lbErrorPrecio.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorPrecio.TabIndex = 14;
+            this.lbErrorPrecio.Text = "*";
+            // 
+            // lbErrorDescripcion
+            // 
+            this.lbErrorDescripcion.AutoSize = true;
+            this.lbErrorDescripcion.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorDescripcion.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorDescripcion.Location = new System.Drawing.Point(322, 82);
+            this.lbErrorDescripcion.Name = "lbErrorDescripcion";
+            this.lbErrorDescripcion.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorDescripcion.TabIndex = 16;
+            this.lbErrorDescripcion.Text = "*";
+            // 
+            // lbErrorArticulo
+            // 
+            this.lbErrorArticulo.AutoSize = true;
+            this.lbErrorArticulo.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorArticulo.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorArticulo.Location = new System.Drawing.Point(322, 53);
+            this.lbErrorArticulo.Name = "lbErrorArticulo";
+            this.lbErrorArticulo.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorArticulo.TabIndex = 17;
+            this.lbErrorArticulo.Text = "*";
+            // 
+            // lbErrorCodigo
+            // 
+            this.lbErrorCodigo.AutoSize = true;
+            this.lbErrorCodigo.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorCodigo.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorCodigo.Location = new System.Drawing.Point(322, 24);
+            this.lbErrorCodigo.Name = "lbErrorCodigo";
+            this.lbErrorCodigo.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorCodigo.TabIndex = 18;
+            this.lbErrorCodigo.Text = "*";
+            // 
             // fmrAgregarProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
             this.ClientSize = new System.Drawing.Size(954, 450);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btnAgregarProducto);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.pbCargarProducto);
             this.Controls.Add(this.panelTituloCargarMarcar);
             this.Controls.Add(this.panelTituloCargarCategoria);
             this.Controls.Add(this.panelCargarMarca);
@@ -237,15 +513,19 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "fmrAgregarProducto";
             this.Text = "fmrAgregarProducto";
+            this.Load += new System.EventHandler(this.fmrAgregarProducto_Load);
             this.panelCargaProducto.ResumeLayout(false);
             this.panelCargaProducto.PerformLayout();
             this.panelCargarCategoria.ResumeLayout(false);
             this.panelCargarMarca.ResumeLayout(false);
-            this.panelTituloCargarCategoria.ResumeLayout(false);
-            this.panelTituloCargarCategoria.PerformLayout();
             this.panelTituloCargarMarcar.ResumeLayout(false);
             this.panelTituloCargarMarcar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCargarProducto)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panelTituloCargarCategoria.ResumeLayout(false);
+            this.panelTituloCargarCategoria.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,16 +537,38 @@
         private System.Windows.Forms.Panel panelCargaProducto;
         private System.Windows.Forms.Panel panelCargarCategoria;
         private System.Windows.Forms.Panel panelCargarMarca;
-        private System.Windows.Forms.Panel panelTituloCargarCategoria;
         private System.Windows.Forms.Panel panelTituloCargarMarcar;
         private System.Windows.Forms.Label lbAgregarCodigo;
         private System.Windows.Forms.PictureBox pbCargarProducto;
-        private System.Windows.Forms.Label lbAgregarCategoria;
         private System.Windows.Forms.Label lbAgregarMarca;
         private System.Windows.Forms.Button btnAgregarCategoria;
         private System.Windows.Forms.Button btnAgregarMarca;
         private System.Windows.Forms.ComboBox cbAgregarMarca;
         private System.Windows.Forms.ComboBox cbAgregarcategoria;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label lbAgregarImagen;
+        private System.Windows.Forms.Label lbAgregarPrecio;
+        private System.Windows.Forms.Label lbAgregarDescripcion;
+        private System.Windows.Forms.Label lbAgregarArticulo;
+        private System.Windows.Forms.Button btnAgregarProducto;
+        private System.Windows.Forms.ComboBox cbCategoria;
+        private System.Windows.Forms.ComboBox cbMarca;
+        private System.Windows.Forms.Button btnAgregarImagen;
+        private System.Windows.Forms.TextBox txtAgregarImagen;
+        private System.Windows.Forms.TextBox txtAgregarPrecio;
+        private System.Windows.Forms.TextBox txtAgregarDescripcion;
+        private System.Windows.Forms.TextBox txtAgregarArticulo;
+        private System.Windows.Forms.TextBox txtAgregarCodigo;
+        private System.Windows.Forms.Label lbCategoria;
+        private System.Windows.Forms.Label lbMarca;
+        private System.Windows.Forms.Label lbImagen;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lbAgregarCategoria;
+        private System.Windows.Forms.Panel panelTituloCargarCategoria;
+        private System.Windows.Forms.Label lbErrorCodigo;
+        private System.Windows.Forms.Label lbErrorArticulo;
+        private System.Windows.Forms.Label lbErrorDescripcion;
+        private System.Windows.Forms.Label lbErrorPrecio;
     }
 }

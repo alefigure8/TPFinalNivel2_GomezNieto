@@ -61,8 +61,8 @@ namespace presentación
             ComboBoxOptions.comboBoxOrdenarPor(comboBoxOrdenar);
             ComboBoxOptions.comboBoxCantidad(comboBoxMostrarCantidad);
             ComboBoxOptions.comboBoxCamposBusquedaAvanzada(cbCampo);
-            ComboBoxOptions.comboBoxCategoria(cbCategoria);
-            ComboBoxOptions.comboBoxMarca(cbMarca);
+            ComboBoxOptions.comboBoxCategoria(cbCategoria, true);
+            ComboBoxOptions.comboBoxMarca(cbMarca, true);
         
         }
 
