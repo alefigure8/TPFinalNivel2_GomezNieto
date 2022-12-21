@@ -12,12 +12,12 @@ namespace helper
 {
     public static class ComboBoxOptions
     {
-        public static void comboBoxMarca(ComboBox combo)
+        public static void comboBoxMarca(ComboBox combo, bool todos = false)
         {
             try
             {
                 listaDesplegable listaMarca = new listaDesplegable();
-                combo.DataSource = listaMarca.cargarMarcas();
+                combo.DataSource = listaMarca.cargarMarcas(todos).OrderBy((x) => x.Descripcion).ToList();
                 combo.SelectedIndex = 0;
             }
             catch (Exception)
@@ -25,12 +25,12 @@ namespace helper
                 MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
-        public static void comboBoxCategoria(ComboBox combo)
+        public static void comboBoxCategoria(ComboBox combo, bool todos = false)
         {
             try
             {
                 listaDesplegable listaCategoria = new listaDesplegable();
-                combo.DataSource = listaCategoria.cargarCategorias();
+                combo.DataSource = listaCategoria.cargarCategorias(todos).OrderBy((x) => x.Descripcion).ToList();
                 combo.SelectedIndex = 0;
             }
             catch (Exception)
