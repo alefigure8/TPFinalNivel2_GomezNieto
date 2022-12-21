@@ -24,7 +24,7 @@ namespace presentación
 
         private void LoadPresentacion()
         {
-            frmPrincipal screen = new frmPrincipal();
+            frmPrincipal screen = new frmPrincipal(this);
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
@@ -69,7 +69,7 @@ namespace presentación
 
         private void btnCatalogo_Click(object sender, EventArgs e)
         {
-            frmPrincipal screen = new frmPrincipal();
+            frmPrincipal screen = new frmPrincipal(this);
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
