@@ -44,18 +44,21 @@ namespace negocio
             }
         }
 
-        public void executeNonQuery()
+        public bool executeNonQuery()
         {
             command.Connection = connection;
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                if (command.ExecuteNonQuery() > 0)
+                    return true;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            return false;
         }
 
         public void closeConnection()
