@@ -67,20 +67,22 @@ namespace helper
             return criterioBusquedaNumero;
         }
 
-        public List<string> cargarCategorias ()
+        public List<Categoria> cargarCategorias (bool todos = false)
         {
             try
             {
                 CategoriaNegocio categoriaLista = new CategoriaNegocio();
                 List<Categoria> aux = categoriaLista.listar();
-                categorias = new List<string>(){ "Todos" };
- 
-                foreach (Categoria categoria in aux)
+
+                if (todos)
                 {
-                    categorias.Add(categoria.Descripcion);
+                    Categoria OpcionTodos = new Categoria();
+                    OpcionTodos.Descripcion = "Todos";
+                    OpcionTodos.Id = 0;
+                    aux.Insert(0, OpcionTodos);
                 }
 
-                return categorias;
+                return aux;
             }
             catch(Exception ex)
             {
@@ -88,20 +90,22 @@ namespace helper
             }
         }
 
-        public List<string> cargarMarcas()
+        public List<Marca> cargarMarcas(bool todos = false)
         {
             try
             {
                 MarcaNegocio marcaLista = new MarcaNegocio();
                 List<Marca> aux = marcaLista.listar();
-                marcas = new List<string>(){"Todos"};
 
-                foreach (Marca categoria in aux)
+                if(todos)
                 {
-                    marcas.Add(categoria.Descripcion);
+                    Marca OpcionTodos = new Marca();
+                    OpcionTodos.Descripcion = "Todos";
+                    OpcionTodos.Id = 0;
+                    aux.Insert(0, OpcionTodos);
                 }
-
-                return marcas;
+                
+                return aux;
             }
             catch(Exception ex) 
             {
