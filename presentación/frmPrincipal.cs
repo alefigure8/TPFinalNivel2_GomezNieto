@@ -17,12 +17,14 @@ namespace presentación
 {
     public partial class frmPrincipal : Form
     {
+         Form parent;
         private List<Producto> listaProductos = null;
         private List<Producto> listaProductosAux;
         int pagina;
 
-        public frmPrincipal()
+        public frmPrincipal(Form parent)
         {
+            this.parent = parent;
             InitializeComponent();
             pagina = 0;
 
@@ -55,12 +57,13 @@ namespace presentación
 
         private void cargarComboBox()
         {
-            comboBoxOrdenarPor();
-            comboBoxCantidad();
-            comboBoxCamposBusquedaAvanzada();
             comboBoxCriterioBusquedaAvanzada();
-            comboBoxMarca();
-            comboBoxCategoria();
+            ComboBoxOptions.comboBoxOrdenarPor(comboBoxOrdenar);
+            ComboBoxOptions.comboBoxCantidad(comboBoxMostrarCantidad);
+            ComboBoxOptions.comboBoxCamposBusquedaAvanzada(cbCampo);
+            ComboBoxOptions.comboBoxCategoria(cbCategoria);
+            ComboBoxOptions.comboBoxMarca(cbMarca);
+        
         }
 
         private void cantidadEncontrada()
@@ -154,75 +157,6 @@ namespace presentación
             catch (Exception)
             {
                 MessageBox.Show(Opciones.MensajeError.LISTAERROR); ;
-            }
-        }
-
-        private void comboBoxCamposBusquedaAvanzada()
-        {
-            try
-            {
-                listaDesplegable listaCampos = new listaDesplegable();
-                cbCampo.DataSource = listaCampos.cargarBusqueraColumnas();
-                cbCampo.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
-            }
-        }
-
-        private void comboBoxOrdenarPor()
-        {
-            try
-            {
-                listaDesplegable listaCantidad = new listaDesplegable();
-                comboBoxOrdenar.DataSource = listaCantidad.cargarBusqueraColumnas();
-                comboBoxOrdenar.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
-            }
-        }
-
-        private void comboBoxCantidad()
-        {
-            try
-            {
-                listaDesplegable listaCantidad = new listaDesplegable();
-                comboBoxMostrarCantidad.DataSource = listaCantidad.cargarBusquedaNumeros();
-                comboBoxMostrarCantidad.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
-            }
-        }
-
-        private void comboBoxMarca()
-        {
-            try
-            {
-                listaDesplegable listaMarca = new listaDesplegable();
-                cbMarca.DataSource = listaMarca.cargarMarcas();
-                cbMarca.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
-            }
-        }
-        private void comboBoxCategoria()
-        {
-            try
-            {
-                listaDesplegable listaCategoria = new listaDesplegable();
-                cbCategoria.DataSource = listaCategoria.cargarCategorias();
-                cbCategoria.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
 
@@ -414,6 +348,13 @@ namespace presentación
 
 
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            fmrAgregarProducto screen = new fmrAgregarProducto();
+            screen.MdiParent = parent;
+            screen.Show();
         }
     }
 }
