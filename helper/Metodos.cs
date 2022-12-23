@@ -50,5 +50,44 @@ namespace helper
                 throw ex;
             }
         }
+
+        public static void vaciarTextBox(List<TextBox> lista)
+        {
+            foreach (var item in lista)
+            {
+                item.Text = string.Empty;
+            }
+        }
+
+        public static void mostrarErrorCampoVacio(List<TextBox> listaTextBox, List<Label> listaLabel)
+        {
+            List<bool> boolsTxt = Validacion.estaVacio(listaTextBox);
+
+            if (boolsTxt.Contains(true))
+            {
+                for (int i = 0; i < listaTextBox.Count(); i++)
+                {
+                    if (boolsTxt[i])
+                    {
+                        listaLabel[i].Visible = boolsTxt[i];
+                        agregarToolTip(listaLabel[i], "Todos los campos son obligatorios");
+                    }
+                }
+            }
+        }
+
+        public static void agregarToolTip(Label label, string msg)
+        {
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(label, msg);
+        }
+
+        public static void errorInvisible(List<Label> listaLabel)
+        {
+            foreach (var item in listaLabel)
+            {
+                item.Visible = false;
+            }
+        }
     }
 }
