@@ -37,7 +37,7 @@ namespace negocio
                     aux.Codigo = (string)datoSQL.Reader["Codigo"];
                     aux.Nombre = (string)datoSQL.Reader["Nombre"];
                     aux.Descripcion = (string)datoSQL.Reader["Descripcion"];
-                    aux.Precio = (decimal)datoSQL.Reader["Precio"];
+                    aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2);
                     aux.ImagenURL = (string)datoSQL.Reader["ImagenUrl"];
 
                     //***** MARCA ***** //
@@ -75,7 +75,7 @@ namespace negocio
                  (
                     $"INSERT INTO {Opciones.DBTablas.ARTICULOS} " +
                     $"({Opciones.Campo.CODIGO}, {Opciones.Campo.NOMBRE}, {Opciones.Campo.DESCRIPCION}, {Opciones.Campo.IDMARCA}, {Opciones.Campo.IDCATEGORIA}, {Opciones.Campo.URLIMAGEN}, {Opciones.Campo.PRECIO}) " +
-                    $"VALUES('{producto.Codigo}', '{producto.Nombre}', '{producto.Descripcion}', '{producto.MarcaInfo.Id}', '{producto.CategoriaInfo.Id}', '{producto.ImagenURL}', {producto.Precio})"
+                    $"VALUES('{producto.Codigo}', '{producto.Nombre}', '{producto.Descripcion}', {producto.MarcaInfo.Id}, {producto.CategoriaInfo.Id}, '{producto.ImagenURL}', {producto.Precio})"
                 );
 
                 if (datoSQL.executeNonQuery())
@@ -92,6 +92,38 @@ namespace negocio
             finally 
             { 
                 datoSQL.closeConnection(); 
+            }
+
+            return false;
+        }
+
+        public bool modificar(Producto producto)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+
+            try
+            {
+                Console.WriteLine(SqlMoney.Parse(producto.Precio.ToString().Replace(".", ",")));
+                datoSQL.setQuery(
+                    $"UPDATE {Opciones.DBTablas.ARTICULOS} " + 
+                    $"SET {Opciones.Campo.CODIGO} = '{producto.Codigo}', {Opciones.Campo.NOMBRE} = '{producto.Nombre}', {Opciones.Campo.DESCRIPCION} = '{producto.Descripcion}', {Opciones.Campo.URLIMAGEN} = '{producto.ImagenURL}', " +
+                    $"{Opciones.Campo.PRECIO} = {producto.Precio}, {Opciones.Campo.IDMARCA} = {producto.MarcaInfo.Id}, {Opciones.Campo.IDCATEGORIA} = {producto.CategoriaInfo.Id} " + 
+                    $"WHERE {Opciones.Campo.ID} = {producto.Id}"
+                );
+
+                if (datoSQL.executeNonQuery())
+                {
+                    datoSQL.closeConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datoSQL.closeConnection();
             }
 
             return false;
@@ -317,7 +349,7 @@ namespace negocio
                    aux.Codigo = (string)datoSQL.Reader[Opciones.Campo.CODIGO];
                    aux.Nombre = (string)datoSQL.Reader[Opciones.Campo.NOMBRE];
                    aux.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCRIPCION];
-                   aux.Precio = (decimal)datoSQL.Reader[Opciones.Campo.PRECIO];
+                   aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2);
                    aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
                    
                    //**** MARCA ***** //
@@ -394,7 +426,7 @@ namespace negocio
                     aux.Codigo = (string)datoSQL.Reader[Opciones.Campo.CODIGO];
                     aux.Nombre = (string)datoSQL.Reader[Opciones.Campo.NOMBRE];
                     aux.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCRIPCION];
-                    aux.Precio = (decimal)datoSQL.Reader[Opciones.Campo.PRECIO];
+                    aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2); ;
                     aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
 
                     //**** MARCA ***** //
