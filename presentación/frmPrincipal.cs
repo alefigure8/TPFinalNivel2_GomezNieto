@@ -11,7 +11,6 @@ using negocio;
 using dominio;
 using helper;
 using configuracion;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace presentación
 {
@@ -93,7 +92,7 @@ namespace presentación
             dgvProductos.Columns[Opciones.Campo.URLIMAGEN].Visible = false;
             dgvProductos.EnableHeadersVisualStyles = false;
 
-            //SORT
+             //SORT
             if (sort)
                 sortListaProducto();
         }
@@ -355,6 +354,15 @@ namespace presentación
             fmrAgregarProducto screen = new fmrAgregarProducto();
             screen.MdiParent = parent;
             screen.Show();
+        }
+
+        private void dgvProductos_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex >= 0 & e.RowIndex>=0)
+            {
+                var cell = dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                cell.ToolTipText = "Doble click para acceder a la descripción";
+            }
         }
     }
 }
