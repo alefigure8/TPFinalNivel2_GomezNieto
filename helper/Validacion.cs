@@ -20,14 +20,24 @@ namespace helper
             return false;
         }
 
-        public static bool estaVacio(List<string> list)
+        public static List<bool> estaVacio(List<TextBox> list)
         {
-            if(list.Contains("") && list.Contains(null))
+            List<bool> bools= new List<bool>();
+
+            foreach(TextBox item in list)
             {
-                return true;
+                if (string.IsNullOrEmpty(item.Text))
+                {
+                    bools.Add(true);
+                }
+                else
+                {
+                    bools.Add(false);
+
+                }
             }
 
-            return false;
+            return bools;
         }
 
         public static bool estaSeleccionado(ComboBox combo)
