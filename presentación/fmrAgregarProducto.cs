@@ -14,7 +14,6 @@ using dominio;
 using negocio;
 using helper;
 using configuracion;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace presentación
 {
@@ -24,6 +23,8 @@ namespace presentación
         private OpenFileDialog file = null;
         List<Marca> listaMarca;
         List<Producto> listaProducto;
+        List<TextBox> listaTxt;
+        List<Label> listaLabel;
 
         public fmrAgregarProducto()
         {
@@ -49,7 +50,23 @@ namespace presentación
             listaMarca = marcaNegocio.listar();
             listaProducto = productoNegocio.listar();
 
-            errorInvisible();
+           listaTxt = new List<TextBox>()
+            {
+                txtAgregarCodigo,
+                txtAgregarArticulo,
+                txtAgregarDescripcion,
+                txtAgregarPrecio,
+            };
+
+            listaLabel = new List<Label>()
+            {
+                lbErrorCodigo,
+                lbErrorArticulo,
+                lbErrorDescripcion,
+                lbErrorPrecio
+            };
+
+            Metodos.errorInvisible(listaLabel);
 
             if (producto != null)
             {
@@ -174,6 +191,7 @@ namespace presentación
             string nombre = txtAgregarArticulo.Text.Trim();
             string descripcion = txtAgregarDescripcion.Text.Trim();
             string imagenURL = txtAgregarImagen.Text.Trim();
+
             Marca marca;
             Categoria categoria;
 
@@ -196,26 +214,22 @@ namespace presentación
                 return;
             }
 
-            // Validar Campos Vacíos
-            List<string> listaValidar = new List<string>()
-            {
-                nombre,
-                codigo,
-                precio,
-                descripcion,
-                imagenURL,
-            };
+            //Resetear las labels error en visible false
+            Metodos.errorInvisible(listaLabel);
 
-            if(Validacion.estaVacio(listaValidar))
+            //Mostrar labels error
+            if(Validacion.estaVacio(listaTxt).Contains(true))
             {
-                MessageBox.Show("Todos los campos son obligatorios");
+                 Metodos.mostrarErrorCampoVacio(listaTxt, listaLabel);
                 return;
             }
 
             //Validar Numeros
-            if(!Validacion.esNumero(precio))
+            if (!Validacion.esNumero(precio))
             {
-                MessageBox.Show("El precio solo puede ser un número");
+                Metodos.agregarToolTip(lbErrorPrecio, "Solo puede ser un número");
+                lbErrorPrecio.Visible = true;
+
                 return;
             }
 
@@ -261,11 +275,7 @@ namespace presentación
                     MessageBox.Show("El Producto fue agregado con éxito");
 
                     //Reset Formulario
-                    txtAgregarPrecio.Text = "";
-                    txtAgregarCodigo.Text = "";
-                    txtAgregarArticulo.Text = "";
-                    txtAgregarDescripcion.Text = "";
-                    txtAgregarImagen.Text = "";
+                    Metodos.vaciarTextBox(listaTxt);
                 }
             }
             catch (Exception ex)
@@ -293,12 +303,5 @@ namespace presentación
             }
         }
 
-        private void errorInvisible()
-        {
-            lbErrorArticulo.Visible = false;
-            lbErrorCodigo.Visible = false;
-            lbErrorDescripcion.Visible = false;
-            lbErrorPrecio.Visible = false;
-        }
     }
 }
