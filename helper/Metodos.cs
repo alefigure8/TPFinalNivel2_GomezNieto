@@ -22,18 +22,18 @@ namespace helper
             }
             catch (Exception ex)
             {
-                DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
+                // DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
 
-                if (result == DialogResult.OK)
-                {
-                    File.Delete(path);
-                    File.Copy(file.FileName, path);
-                    producto.ImagenURL = path;
-                }
-                else
-                {
+                //if (result == DialogResult.OK)
+                //{
+                //    File.Delete(path);
+                //    File.Copy(file.FileName, path);
+                //    producto.ImagenURL = path;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
 
             }
         }
@@ -47,7 +47,6 @@ namespace helper
             catch (Exception ex)
             {
                 pictureBox.Load("https://i0.wp.com/thealmanian.com/wp-content/uploads/2019/01/product_image_thumbnail_placeholder.png");
-                throw ex;
             }
         }
 
@@ -87,6 +86,36 @@ namespace helper
             foreach (var item in listaLabel)
             {
                 item.Visible = false;
+            }
+        }
+
+        public static void disableComboBox(ComboBox combo)
+        {
+            combo.DropDownStyle = ComboBoxStyle.Simple;
+            combo.Enabled = false;
+        }
+
+        public static void enableComboBox(ComboBox combo)
+        {
+            combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.Enabled = true;
+        }
+
+        public static void textBoxReadOnly(List<TextBox> lista, bool read = true)
+        {
+            if(read)
+            {
+                foreach (var txt in lista)
+                {
+                    txt.ReadOnly = true;
+                }
+            }
+            else
+            {
+                foreach (var txt in lista)
+                {
+                    txt.ReadOnly = false;
+                }
             }
         }
     }
