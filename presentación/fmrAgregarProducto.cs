@@ -14,27 +14,33 @@ using dominio;
 using negocio;
 using helper;
 using configuracion;
+using Newtonsoft.Json;
+using System.Data.SqlTypes;
+using System.Globalization;
 
 namespace presentación
 {
     public partial class fmrAgregarProducto : Form
     {
         Producto producto = null;
+        Producto productoAux= null;
         private OpenFileDialog file = null;
         List<Marca> listaMarca;
         List<Producto> listaProducto;
         List<TextBox> listaTxt;
         List<Label> listaLabel;
+        bool vista;
 
         public fmrAgregarProducto()
         {
             InitializeComponent();
         }
 
-        public fmrAgregarProducto(Producto producto)
+        public fmrAgregarProducto(Producto producto, bool vista = true)
         {
             InitializeComponent();
             this.producto = producto;
+            this.vista = vista;
         }
 
         private void fmrAgregarProducto_Load(object sender, EventArgs e)
@@ -47,6 +53,11 @@ namespace presentación
             ComboBoxOptions.comboBoxCategoria(cbAgregarcategoria);
             ComboBoxOptions.comboBoxCategoria(cbCategoria);
 
+            cbMarca.ValueMember = Opciones.Campo.ID;
+            cbMarca.DisplayMember = Opciones.Campo.DESCRIPCION;
+            cbCategoria.ValueMember = Opciones.Campo.ID;
+            cbCategoria.DisplayMember = Opciones.Campo.DESCRIPCION;
+
             listaMarca = marcaNegocio.listar();
             listaProducto = productoNegocio.listar();
 
@@ -56,6 +67,7 @@ namespace presentación
                 txtAgregarArticulo,
                 txtAgregarDescripcion,
                 txtAgregarPrecio,
+                txtAgregarImagen,
             };
 
             listaLabel = new List<Label>()
@@ -63,17 +75,36 @@ namespace presentación
                 lbErrorCodigo,
                 lbErrorArticulo,
                 lbErrorDescripcion,
-                lbErrorPrecio
+                lbErrorPrecio,
+                lbErrorImagen
             };
 
             Metodos.errorInvisible(listaLabel);
 
+            //Modo
             if (producto != null)
             {
-                //TODO cargar formulario
-                lbTituloCargarProducto.Text = "MODIFICAR PRODUCTO";
-                btnAgregarProducto.Text = "Modificar";
+                //Carga formulario con los datos del objeto a editar
+                txtAgregarCodigo.Text = producto.Codigo;
+                txtAgregarArticulo.Text = producto.Nombre;
+                txtAgregarDescripcion.Text = producto.Descripcion;
+                txtAgregarPrecio.Text = producto.Precio.ToString();
+                txtAgregarImagen.Text = producto.ImagenURL;
+                cbCategoria.SelectedValue = producto.CategoriaInfo.Id;
+                cbMarca.SelectedValue = producto.MarcaInfo.Id;
+
+                Metodos.cargarimagen(pbCargarProducto, producto.ImagenURL);
+
+                clonarObjeto();
+
+                //Modo vista o edición
+                if (this.vista)
+                    modoVista();
+                else
+                    modoModificar();
+
             }
+            //Modo Agregar
             else
             {
                 producto = new Producto();
@@ -163,20 +194,24 @@ namespace presentación
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            string codigo = txtAgregarCodigo.Text;
-            string nombre = txtAgregarArticulo.Text;
-            string precio = txtAgregarPrecio.Text;
-            
-            if(string.IsNullOrEmpty(precio) && string.IsNullOrEmpty(nombre) && string.IsNullOrEmpty(codigo))
+
+            if (Validacion.estaVacio(listaTxt).Contains(true))
             {
-                 this.Close();
+                this.Close();
             }
             else
             {
-                MessageBoxButtons btn = MessageBoxButtons.OKCancel;
-                DialogResult result =  MessageBox.Show("Si cancela todos los datos se perderan", "Advertencia", btn);
+                if(btnAgregarProducto.Text == Opciones.Btn.MODIFICAR)
+                {
+                    MessageBoxButtons btn = MessageBoxButtons.OKCancel;
+                    DialogResult result = MessageBox.Show("Si cancela todos los datos se perderan", "Advertencia", btn);
 
-                if (result == DialogResult.OK)
+                    if (result == DialogResult.OK)
+                    {
+                        modoVista();
+                    }
+                }
+                else
                 {
                     this.Close();
                 }
@@ -185,6 +220,13 @@ namespace presentación
 
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
+            //Habilitar campos para editar
+            if(this.vista)
+            {
+                modoModificar();
+                return;
+            }
+
             // Variables formulario
             string precio = txtAgregarPrecio.Text.Trim();
             string codigo = txtAgregarCodigo.Text.Trim();
@@ -194,13 +236,6 @@ namespace presentación
 
             Marca marca;
             Categoria categoria;
-
-            //Validar si codigo ya se encuentra cargado
-            if (listaProducto.Any(prod => prod.Codigo.ToLower() == codigo.ToLower()))
-            {
-                MessageBox.Show("El codigo que intenta ingresar ya existe");
-                return;
-            }
 
             //Validar ComboBox
             if (Validacion.estaSeleccionado(cbMarca) && Validacion.estaSeleccionado(cbCategoria))
@@ -241,47 +276,101 @@ namespace presentación
             producto.MarcaInfo= marca;
             producto.CategoriaInfo= categoria;
 
-            try
-            {
-                Metodos.cargarimagen(pbCargarProducto, imagenURL);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("La iamgen no pudo ser cargada");
-            }
+            Metodos.cargarimagen(pbCargarProducto, imagenURL);
 
             ProductoNegocio productoNegocio = new ProductoNegocio();
 
-            //Agregara la Base de Datos
-            try
+            // Agregar producto nuevo
+            if(producto.Id == 0)
             {
-                try
+                //Validar si codigo ya se encuentra cargado
+                if (listaProducto.Any(prod => prod.Codigo.ToLower() == codigo.ToLower()))
                 {
-                    if(file != null && !txtAgregarImagen.Text.ToLower().Contains("http"))
-                    {
-                        Metodos.copiarImagen(producto, file);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show("Cambie la imagen y luego intenté guardar nuevamente");
-                    file = null;
-                    txtAgregarImagen.Text = "";
+                    MessageBox.Show("El codigo que intenta ingresar ya existe");
                     return;
                 }
 
-                if (productoNegocio.agregar(producto))
+                //Guardar
+                try
                 {
-                    MessageBox.Show("El Producto fue agregado con éxito");
+                    try
+                    {
+                        //Copir imagen cargada desde Archivos
+                        if (file != null && !txtAgregarImagen.Text.ToLower().Contains("http"))
+                        {
+                            Metodos.copiarImagen(producto, file);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cambie la imagen y luego intenté guardar nuevamente");
+                        file = null;
+                        return;
+                    }
 
-                    //Reset Formulario
-                    Metodos.vaciarTextBox(listaTxt);
+                     // Guardar producto en la base de datos
+                    if (productoNegocio.agregar(producto))
+                    {
+                        MessageBox.Show("El Producto fue agregado con éxito");
+
+                        //Reset Formulario
+                        Metodos.vaciarTextBox(listaTxt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("El producto no pudo ser cargado");
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("El producto no pudo ser cargado");
+                try
+                {
+                    try
+                    {
+                        if (txtAgregarImagen.Text != producto.ImagenURL)
+                        {
+                            if (file != null && !txtAgregarImagen.Text.ToLower().Contains("http"))
+                            {
+                                Metodos.copiarImagen(producto, file);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Cambie la imagen y luego intenté guardar nuevamente");
+                        file = null;
+                        return;
+                    }
+
+                    if (productoNegocio.modificar(producto))
+                    {
+                        MessageBox.Show("El producto fue modificado");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if(productoAux != null)
+                    {
+                        txtAgregarCodigo.Text = productoAux.Codigo;
+                        txtAgregarArticulo.Text = productoAux.Nombre;
+                        txtAgregarDescripcion.Text = productoAux.Descripcion;
+                        txtAgregarPrecio.Text = productoAux.Precio.ToString();
+                        txtAgregarImagen.Text = productoAux.ImagenURL;
+                        cbCategoria.SelectedValue = productoAux.MarcaInfo.Id;
+                        cbMarca.SelectedValue = productoAux.CategoriaInfo.Id;
+
+                        Metodos.cargarimagen(pbCargarProducto, productoAux.ImagenURL);
+
+                        //clonarObjeto(productoAux, producto);
+                    }
+
+                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show("El producto no pudo ser modificar");
+                }
             }
+
+            modoVista();
         }
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
@@ -301,6 +390,49 @@ namespace presentación
                     MessageBox.Show("La iamgen no pudo ser cargada");
                 }
             }
+        }
+
+        private void modoVista()
+        {
+            lbTituloCargarProducto.Text = "VISTA PRODUCTO";
+            btnAgregarProducto.Text = Opciones.Btn.EDITAR;
+            btnAgregarImagen.Visible = false;
+            Metodos.textBoxReadOnly(listaTxt);
+            Metodos.disableComboBox(cbMarca);
+            Metodos.disableComboBox(cbCategoria);
+
+            this.vista = true;
+        }
+
+        private void modoModificar()
+        {
+            lbTituloCargarProducto.Text = "MODIFICAR PRODUCTO";
+            btnAgregarProducto.Text = Opciones.Btn.MODIFICAR;
+            btnAgregarImagen.Visible = true;
+            Metodos.textBoxReadOnly(listaTxt, false);
+            Metodos.enableComboBox(cbMarca);
+            Metodos.enableComboBox(cbCategoria);
+
+            this.vista = false;
+        }
+
+        private void clonarObjeto()
+        {
+            productoAux = new Producto();
+            productoAux.Id = producto.Id;
+            productoAux.Codigo = producto.Codigo;
+            productoAux.Nombre = producto.Nombre;
+            productoAux.Descripcion = producto.Descripcion;
+            productoAux.Precio = producto.Precio;
+            productoAux.ImagenURL = producto.ImagenURL;
+            Categoria categoriaAux = new Categoria();
+            categoriaAux.Id = producto.CategoriaInfo.Id;
+            categoriaAux.Descripcion = producto.CategoriaInfo.Descripcion;
+            Marca marcaAux = new Marca();
+            marcaAux.Id = producto.MarcaInfo.Id;
+            marcaAux.Descripcion = producto.Descripcion;
+            productoAux.CategoriaInfo = categoriaAux;
+            productoAux.MarcaInfo = marcaAux;
         }
 
     }

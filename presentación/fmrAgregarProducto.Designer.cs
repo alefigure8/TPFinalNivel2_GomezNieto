@@ -65,6 +65,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbAgregarCategoria = new System.Windows.Forms.Label();
             this.panelTituloCargarCategoria = new System.Windows.Forms.Panel();
+            this.lbErrorImagen = new System.Windows.Forms.Label();
             this.panelCargaProducto.SuspendLayout();
             this.panelCargarCategoria.SuspendLayout();
             this.panelCargarMarca.SuspendLayout();
@@ -89,6 +90,7 @@
             // panelCargaProducto
             // 
             this.panelCargaProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panelCargaProducto.Controls.Add(this.lbErrorImagen);
             this.panelCargaProducto.Controls.Add(this.lbErrorCodigo);
             this.panelCargaProducto.Controls.Add(this.lbErrorArticulo);
             this.panelCargaProducto.Controls.Add(this.lbErrorDescripcion);
@@ -494,6 +496,17 @@
             this.panelTituloCargarCategoria.Size = new System.Drawing.Size(290, 24);
             this.panelTituloCargarCategoria.TabIndex = 4;
             // 
+            // lbErrorImagen
+            // 
+            this.lbErrorImagen.AutoSize = true;
+            this.lbErrorImagen.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorImagen.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorImagen.Location = new System.Drawing.Point(350, 201);
+            this.lbErrorImagen.Name = "lbErrorImagen";
+            this.lbErrorImagen.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorImagen.TabIndex = 19;
+            this.lbErrorImagen.Text = "*";
+            // 
             // fmrAgregarProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -570,5 +583,6 @@
         private System.Windows.Forms.Label lbErrorArticulo;
         private System.Windows.Forms.Label lbErrorDescripcion;
         private System.Windows.Forms.Label lbErrorPrecio;
+        private System.Windows.Forms.Label lbErrorImagen;
     }
 }

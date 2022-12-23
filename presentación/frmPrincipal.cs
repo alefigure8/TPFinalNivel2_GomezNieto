@@ -266,8 +266,10 @@ namespace presentación
             Producto producto = new Producto();
             if(dgvProductos.CurrentRow != null)
             {
-                producto = (Producto)dgvProductos.CurrentRow.DataBoundItem;
-                MessageBox.Show(producto.Nombre);
+                fmrAgregarProducto screen = new fmrAgregarProducto((Producto)dgvProductos.CurrentRow.DataBoundItem);
+                screen.MdiParent = parent;
+                screen.Show();
+                
             }
         }
 
