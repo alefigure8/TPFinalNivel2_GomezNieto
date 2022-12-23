@@ -85,5 +85,13 @@ namespace configuracion
             public const string CATEGORIAS = "CATEGORIAS";
             public const string ARTICULOS = "ARTICULOS";
         }
+
+        public struct Btn
+        {
+            public const string AGREGAR = "Agregar";
+            public const string MODIFICAR = "Modificar";
+            public const string EDITAR = "Editar";
+            public const string CANCELAR = "Cancelar";
+        }
     }
 }
