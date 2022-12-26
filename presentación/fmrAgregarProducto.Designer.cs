@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmrAgregarProducto));
             this.lbTituloCargarProducto = new System.Windows.Forms.Label();
             this.panelCargaProducto = new System.Windows.Forms.Panel();
+            this.lbErrorImagen = new System.Windows.Forms.Label();
             this.lbErrorCodigo = new System.Windows.Forms.Label();
             this.lbErrorArticulo = new System.Windows.Forms.Label();
             this.lbErrorDescripcion = new System.Windows.Forms.Label();
@@ -49,8 +51,10 @@
             this.lbAgregarDescripcion = new System.Windows.Forms.Label();
             this.lbAgregarArticulo = new System.Windows.Forms.Label();
             this.lbAgregarCodigo = new System.Windows.Forms.Label();
+            this.btnConfigureMarca = new System.Windows.Forms.Button();
             this.panelCargarCategoria = new System.Windows.Forms.Panel();
             this.cbAgregarcategoria = new System.Windows.Forms.ComboBox();
+            this.btnConfigureCategoria = new System.Windows.Forms.Button();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.panelCargarMarca = new System.Windows.Forms.Panel();
             this.cbAgregarMarca = new System.Windows.Forms.ComboBox();
@@ -63,9 +67,10 @@
             this.lbImagen = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pbDeleteImage = new System.Windows.Forms.PictureBox();
             this.lbAgregarCategoria = new System.Windows.Forms.Label();
             this.panelTituloCargarCategoria = new System.Windows.Forms.Panel();
-            this.lbErrorImagen = new System.Windows.Forms.Label();
+            this.btnBorrar = new System.Windows.Forms.Button();
             this.panelCargaProducto.SuspendLayout();
             this.panelCargarCategoria.SuspendLayout();
             this.panelCargarMarca.SuspendLayout();
@@ -73,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbCargarProducto)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbDeleteImage)).BeginInit();
             this.panelTituloCargarCategoria.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,6 +120,17 @@
             this.panelCargaProducto.Name = "panelCargaProducto";
             this.panelCargaProducto.Size = new System.Drawing.Size(371, 238);
             this.panelCargaProducto.TabIndex = 1;
+            // 
+            // lbErrorImagen
+            // 
+            this.lbErrorImagen.AutoSize = true;
+            this.lbErrorImagen.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbErrorImagen.ForeColor = System.Drawing.Color.LightCoral;
+            this.lbErrorImagen.Location = new System.Drawing.Point(350, 201);
+            this.lbErrorImagen.Name = "lbErrorImagen";
+            this.lbErrorImagen.Size = new System.Drawing.Size(18, 18);
+            this.lbErrorImagen.TabIndex = 19;
+            this.lbErrorImagen.Text = "*";
             // 
             // lbErrorCodigo
             // 
@@ -311,10 +328,28 @@
             this.lbAgregarCodigo.TabIndex = 0;
             this.lbAgregarCodigo.Text = "Código";
             // 
+            // btnConfigureMarca
+            // 
+            this.btnConfigureMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnConfigureMarca.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConfigureMarca.BackgroundImage")));
+            this.btnConfigureMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnConfigureMarca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfigureMarca.FlatAppearance.BorderSize = 0;
+            this.btnConfigureMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfigureMarca.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfigureMarca.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnConfigureMarca.Location = new System.Drawing.Point(186, 57);
+            this.btnConfigureMarca.Name = "btnConfigureMarca";
+            this.btnConfigureMarca.Size = new System.Drawing.Size(27, 22);
+            this.btnConfigureMarca.TabIndex = 20;
+            this.btnConfigureMarca.UseVisualStyleBackColor = false;
+            this.btnConfigureMarca.Click += new System.EventHandler(this.btnConfigureMarca_Click);
+            // 
             // panelCargarCategoria
             // 
             this.panelCargarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
             this.panelCargarCategoria.Controls.Add(this.cbAgregarcategoria);
+            this.panelCargarCategoria.Controls.Add(this.btnConfigureCategoria);
             this.panelCargarCategoria.Controls.Add(this.btnAgregarCategoria);
             this.panelCargarCategoria.Location = new System.Drawing.Point(633, 115);
             this.panelCargarCategoria.Name = "panelCargarCategoria";
@@ -325,16 +360,34 @@
             // 
             this.cbAgregarcategoria.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbAgregarcategoria.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbAgregarcategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.cbAgregarcategoria.FormattingEnabled = true;
             this.cbAgregarcategoria.Location = new System.Drawing.Point(52, 19);
             this.cbAgregarcategoria.Name = "cbAgregarcategoria";
             this.cbAgregarcategoria.Size = new System.Drawing.Size(187, 21);
             this.cbAgregarcategoria.TabIndex = 8;
+            this.cbAgregarcategoria.TextChanged += new System.EventHandler(this.cbAgregarcategoria_TextChanged);
+            // 
+            // btnConfigureCategoria
+            // 
+            this.btnConfigureCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnConfigureCategoria.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConfigureCategoria.BackgroundImage")));
+            this.btnConfigureCategoria.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnConfigureCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnConfigureCategoria.FlatAppearance.BorderSize = 0;
+            this.btnConfigureCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfigureCategoria.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfigureCategoria.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnConfigureCategoria.Location = new System.Drawing.Point(186, 58);
+            this.btnConfigureCategoria.Name = "btnConfigureCategoria";
+            this.btnConfigureCategoria.Size = new System.Drawing.Size(27, 23);
+            this.btnConfigureCategoria.TabIndex = 21;
+            this.btnConfigureCategoria.UseVisualStyleBackColor = false;
+            this.btnConfigureCategoria.Click += new System.EventHandler(this.btnConfigureCategoria_Click);
             // 
             // btnAgregarCategoria
             // 
             this.btnAgregarCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnAgregarCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregarCategoria.FlatAppearance.BorderSize = 0;
             this.btnAgregarCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarCategoria.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -350,6 +403,7 @@
             // panelCargarMarca
             // 
             this.panelCargarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panelCargarMarca.Controls.Add(this.btnConfigureMarca);
             this.panelCargarMarca.Controls.Add(this.cbAgregarMarca);
             this.panelCargarMarca.Controls.Add(this.btnAgregarMarca);
             this.panelCargarMarca.Location = new System.Drawing.Point(633, 237);
@@ -361,16 +415,17 @@
             // 
             this.cbAgregarMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbAgregarMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbAgregarMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
             this.cbAgregarMarca.FormattingEnabled = true;
             this.cbAgregarMarca.Location = new System.Drawing.Point(47, 19);
             this.cbAgregarMarca.Name = "cbAgregarMarca";
             this.cbAgregarMarca.Size = new System.Drawing.Size(187, 21);
             this.cbAgregarMarca.TabIndex = 7;
+            this.cbAgregarMarca.TextChanged += new System.EventHandler(this.cbAgregarMarca_TextChanged);
             // 
             // btnAgregarMarca
             // 
             this.btnAgregarMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnAgregarMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAgregarMarca.FlatAppearance.BorderSize = 0;
             this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregarMarca.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -414,10 +469,11 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.Brown;
+            this.btnCancelar.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
-            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkRed;
+            this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Highlight;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
@@ -462,7 +518,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(44)))), ((int)(((byte)(56)))));
             this.panel1.Controls.Add(this.lbImagen);
-            this.panel1.Location = new System.Drawing.Point(419, 91);
+            this.panel1.Location = new System.Drawing.Point(420, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(207, 24);
             this.panel1.TabIndex = 6;
@@ -470,11 +526,27 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panel2.Controls.Add(this.pbDeleteImage);
             this.panel2.Controls.Add(this.pbCargarProducto);
-            this.panel2.Location = new System.Drawing.Point(418, 115);
+            this.panel2.Location = new System.Drawing.Point(419, 115);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(208, 214);
             this.panel2.TabIndex = 5;
+            // 
+            // pbDeleteImage
+            // 
+            this.pbDeleteImage.BackColor = System.Drawing.Color.Transparent;
+            this.pbDeleteImage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pbDeleteImage.BackgroundImage")));
+            this.pbDeleteImage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbDeleteImage.Image = ((System.Drawing.Image)(resources.GetObject("pbDeleteImage.Image")));
+            this.pbDeleteImage.InitialImage = null;
+            this.pbDeleteImage.Location = new System.Drawing.Point(163, 29);
+            this.pbDeleteImage.Name = "pbDeleteImage";
+            this.pbDeleteImage.Size = new System.Drawing.Size(23, 30);
+            this.pbDeleteImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbDeleteImage.TabIndex = 17;
+            this.pbDeleteImage.TabStop = false;
+            this.pbDeleteImage.Click += new System.EventHandler(this.pbDeleteImage_Click);
             // 
             // lbAgregarCategoria
             // 
@@ -496,16 +568,23 @@
             this.panelTituloCargarCategoria.Size = new System.Drawing.Size(290, 24);
             this.panelTituloCargarCategoria.TabIndex = 4;
             // 
-            // lbErrorImagen
+            // btnBorrar
             // 
-            this.lbErrorImagen.AutoSize = true;
-            this.lbErrorImagen.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbErrorImagen.ForeColor = System.Drawing.Color.LightCoral;
-            this.lbErrorImagen.Location = new System.Drawing.Point(350, 201);
-            this.lbErrorImagen.Name = "lbErrorImagen";
-            this.lbErrorImagen.Size = new System.Drawing.Size(18, 18);
-            this.lbErrorImagen.TabIndex = 19;
-            this.lbErrorImagen.Text = "*";
+            this.btnBorrar.BackColor = System.Drawing.Color.Brown;
+            this.btnBorrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBorrar.FlatAppearance.BorderSize = 0;
+            this.btnBorrar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
+            this.btnBorrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkRed;
+            this.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBorrar.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBorrar.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnBorrar.Location = new System.Drawing.Point(335, 335);
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.Size = new System.Drawing.Size(75, 23);
+            this.btnBorrar.TabIndex = 16;
+            this.btnBorrar.Text = "Eliminar";
+            this.btnBorrar.UseVisualStyleBackColor = false;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // fmrAgregarProducto
             // 
@@ -513,6 +592,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
             this.ClientSize = new System.Drawing.Size(954, 450);
+            this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.btnAgregarProducto);
@@ -537,6 +617,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbDeleteImage)).EndInit();
             this.panelTituloCargarCategoria.ResumeLayout(false);
             this.panelTituloCargarCategoria.PerformLayout();
             this.ResumeLayout(false);
@@ -584,5 +665,9 @@
         private System.Windows.Forms.Label lbErrorDescripcion;
         private System.Windows.Forms.Label lbErrorPrecio;
         private System.Windows.Forms.Label lbErrorImagen;
+        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.PictureBox pbDeleteImage;
+        private System.Windows.Forms.Button btnConfigureMarca;
+        private System.Windows.Forms.Button btnConfigureCategoria;
     }
 }

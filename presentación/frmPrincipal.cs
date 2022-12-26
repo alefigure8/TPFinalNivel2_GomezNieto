@@ -266,7 +266,7 @@ namespace presentación
             Producto producto = new Producto();
             if(dgvProductos.CurrentRow != null)
             {
-                fmrAgregarProducto screen = new fmrAgregarProducto((Producto)dgvProductos.CurrentRow.DataBoundItem);
+                fmrAgregarProducto screen = new fmrAgregarProducto((Producto)dgvProductos.CurrentRow.DataBoundItem, parent);
                 screen.MdiParent = parent;
                 screen.Show();
                 
@@ -346,14 +346,12 @@ namespace presentación
                 {
                     MessageBox.Show(Opciones.MensajeError.LISTAERROR);
                 }
-
-
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            fmrAgregarProducto screen = new fmrAgregarProducto();
+            fmrAgregarProducto screen = new fmrAgregarProducto(parent);
             screen.MdiParent = parent;
             screen.Show();
         }
