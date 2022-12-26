@@ -26,7 +26,7 @@ namespace helper
 
             foreach(TextBox item in list)
             {
-                if (string.IsNullOrEmpty(item.Text))
+                if (string.IsNullOrEmpty(item.Text) && item.Name != "txtAgregarImagen")
                 {
                     bools.Add(true);
                 }
