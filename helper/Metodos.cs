@@ -12,30 +12,50 @@ namespace helper
 {
     static public class Metodos
     {
-        static public void copiarImagen(Producto producto, OpenFileDialog file)
+        static public void copiarImagen(Producto producto, OpenFileDialog file, TextBox txtImagen)
         {
             string path = ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName;
             try
             {
                 File.Copy(file.FileName, path);
                 producto.ImagenURL = path;
+                txtImagen.Text = path;
             }
             catch (Exception ex)
             {
-                // DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
+                DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
 
-                //if (result == DialogResult.OK)
-                //{
-                //    File.Delete(path);
-                //    File.Copy(file.FileName, path);
-                //    producto.ImagenURL = path;
-                //}
-                //else
-                //{
+                if (result == DialogResult.OK)
+                {
+                    File.Delete(path);
+                    File.Copy(file.FileName, path);
+                    producto.ImagenURL = path;
+                    txtImagen.Text = path;
+                }
+                else
+                {
                     throw ex;
-                //}
-
+                }
             }
+        }
+
+        static public bool borrarImagen(Producto producto, OpenFileDialog file, TextBox txtImagen)
+        {
+            try
+            {
+                //string path = producto.ImagenURL;
+                //File.Delete(path);
+                producto.ImagenURL = "";
+                txtImagen.Text = "";
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+
         }
 
         public static void cargarimagen(PictureBox pictureBox, string image)
@@ -46,7 +66,8 @@ namespace helper
             }
             catch (Exception ex)
             {
-                pictureBox.Load("https://i0.wp.com/thealmanian.com/wp-content/uploads/2019/01/product_image_thumbnail_placeholder.png");
+                string imgPlaceholder = ConfigurationManager.AppSettings["images-folder"] + "imgPlaceholder.jpg";
+                pictureBox.Load(imgPlaceholder);
             }
         }
 
@@ -116,6 +137,18 @@ namespace helper
                 {
                     txt.ReadOnly = false;
                 }
+            }
+        }
+
+        public static void buscarEnLista<T>(List<T> listaCategoria, ComboBox combo, Button btn)
+        {
+            if ((listaCategoria.Any(x => x.ToString() == combo.Text)))
+            {
+                btn.Visible = true;
+            }
+            else
+            {
+                btn.Visible = false;
             }
         }
     }
