@@ -92,6 +92,7 @@ namespace configuracion
             public const string MODIFICAR = "Modificar";
             public const string EDITAR = "Editar";
             public const string CANCELAR = "Cancelar";
+            public const string REGRESAR = "Regresar";
         }
     }
 }
