@@ -12,6 +12,7 @@ namespace negocio
     public class MarcaNegocio
     {
         public List<Marca> listaMarca = new List<Marca>();
+
         public List<Marca> listar()
         {
             AccesoDB datoSQL = new AccesoDB();
@@ -90,6 +91,58 @@ namespace negocio
             finally
             {
                 datoSQL.closeConnection();
+            }
+
+            return false;
+        }
+
+        public bool modificar(Marca marca, string change)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+            try
+            {
+                datoSQL.setQuery($"UPDATE {Opciones.DBTablas.MARCAS} SET {Opciones.Campo.DESCRIPCION} = '{change}' WHERE {Opciones.Campo.ID} = {marca.Id}");
+                if (datoSQL.executeNonQuery())
+                {
+                    datoSQL.closeConnection();
+                    return true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return false;
+        }
+
+        public bool eliminar(Marca marca)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            List<Producto> listaProductos = productoNegocio.listar();
+
+            try
+            {
+                if (listaProductos.All(x => x.MarcaInfo.Id != marca.Id))
+                {
+                    datoSQL.setQuery($"DELETE {Opciones.DBTablas.MARCAS} WHERE {Opciones.Campo.ID} = {marca.Id}");
+
+                    if (datoSQL.executeNonQuery())
+                    {
+                        datoSQL.closeConnection();
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datoSQL.closeConnection(); 
             }
 
             return false;
