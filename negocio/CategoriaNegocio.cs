@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using dominio;
 using configuracion;
+using System.Text.RegularExpressions;
 
 namespace negocio
 {
     public class CategoriaNegocio
     {
         public List<Categoria> listaCategoria = new List<Categoria>();
+
         public List<Categoria> listar()
         {
             AccesoDB datoSQL = new AccesoDB();
@@ -51,6 +53,57 @@ namespace negocio
                 datoSQL.setQuery($"INSERT INTO {Opciones.DBTablas.CATEGORIAS} ({Opciones.Campo.DESCRIPCION}) VALUES ('{keyword}')");
                 if (datoSQL.executeNonQuery())
                     return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datoSQL.closeConnection();
+            }
+
+            return false;
+        }
+
+        public bool modificar(Categoria categoria, string change)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+            try
+            {
+                datoSQL.setQuery($"UPDATE {Opciones.DBTablas.CATEGORIAS} SET {Opciones.Campo.DESCRIPCION} = '{change}' WHERE {Opciones.Campo.ID} = {categoria.Id}");
+                if (datoSQL.executeNonQuery())
+                { 
+                    datoSQL.closeConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return false;
+        }
+
+        public bool eliminar(Categoria categoria)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            List<Producto> listaProductos = productoNegocio.listar();
+
+            try
+            {
+                if (listaProductos.All(x => x.CategoriaInfo.Id != categoria.Id))
+                {
+                    datoSQL.setQuery($"DELETE {Opciones.DBTablas.CATEGORIAS} WHERE {Opciones.Campo.ID} = {categoria.Id}");
+
+                    if (datoSQL.executeNonQuery())
+                    {
+                        datoSQL.closeConnection();
+                        return true;
+                    }
+                }
             }
             catch (Exception ex)
             {
