@@ -9,6 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Data.SqlTypes;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Globalization;
 
 namespace negocio
 {
@@ -37,7 +38,7 @@ namespace negocio
                     aux.Codigo = (string)datoSQL.Reader["Codigo"];
                     aux.Nombre = (string)datoSQL.Reader["Nombre"];
                     aux.Descripcion = (string)datoSQL.Reader["Descripcion"];
-                    aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2);
+                    aux.Precio = Math.Round(Convert.ToDecimal(datoSQL.Reader["Precio"]), 2);
                     aux.ImagenURL = (string)datoSQL.Reader["ImagenUrl"];
 
                     //***** MARCA ***** //
@@ -75,7 +76,7 @@ namespace negocio
                  (
                     $"INSERT INTO {Opciones.DBTablas.ARTICULOS} " +
                     $"({Opciones.Campo.CODIGO}, {Opciones.Campo.NOMBRE}, {Opciones.Campo.DESCRIPCION}, {Opciones.Campo.IDMARCA}, {Opciones.Campo.IDCATEGORIA}, {Opciones.Campo.URLIMAGEN}, {Opciones.Campo.PRECIO}) " +
-                    $"VALUES('{producto.Codigo}', '{producto.Nombre}', '{producto.Descripcion}', {producto.MarcaInfo.Id}, {producto.CategoriaInfo.Id}, '{producto.ImagenURL}', {producto.Precio})"
+                    $"VALUES('{producto.Codigo}', '{producto.Nombre}', '{producto.Descripcion}', {producto.MarcaInfo.Id}, {producto.CategoriaInfo.Id}, '{producto.ImagenURL}', {producto.Precio.ToString(new CultureInfo("en-US"))})"
                 );
 
                 if (datoSQL.executeNonQuery())
@@ -100,14 +101,12 @@ namespace negocio
         public bool modificar(Producto producto)
         {
             AccesoDB datoSQL = new AccesoDB();
-
             try
             {
-                Console.WriteLine(SqlMoney.Parse(producto.Precio.ToString().Replace(".", ",")));
                 datoSQL.setQuery(
                     $"UPDATE {Opciones.DBTablas.ARTICULOS} " + 
                     $"SET {Opciones.Campo.CODIGO} = '{producto.Codigo}', {Opciones.Campo.NOMBRE} = '{producto.Nombre}', {Opciones.Campo.DESCRIPCION} = '{producto.Descripcion}', {Opciones.Campo.URLIMAGEN} = '{producto.ImagenURL}', " +
-                    $"{Opciones.Campo.PRECIO} = {producto.Precio}, {Opciones.Campo.IDMARCA} = {producto.MarcaInfo.Id}, {Opciones.Campo.IDCATEGORIA} = {producto.CategoriaInfo.Id} " + 
+                    $"{Opciones.Campo.PRECIO} = {producto.Precio.ToString(new CultureInfo("en-US"))}, {Opciones.Campo.IDMARCA} = {producto.MarcaInfo.Id}, {Opciones.Campo.IDCATEGORIA} = {producto.CategoriaInfo.Id} " + 
                     $"WHERE {Opciones.Campo.ID} = {producto.Id}"
                 );
 
@@ -124,6 +123,28 @@ namespace negocio
             finally
             {
                 datoSQL.closeConnection();
+            }
+
+            return false;
+        }
+
+        public bool borrar(int id)
+        {
+            AccesoDB datoSQL = new AccesoDB();
+
+            try
+            {
+                datoSQL.setQuery($"DELETE {Opciones.DBTablas.ARTICULOS} WHERE {Opciones.Campo.ID} = {id}");
+                if(datoSQL.executeNonQuery())
+                {
+                    datoSQL.closeConnection();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
 
             return false;
@@ -349,8 +370,8 @@ namespace negocio
                    aux.Codigo = (string)datoSQL.Reader[Opciones.Campo.CODIGO];
                    aux.Nombre = (string)datoSQL.Reader[Opciones.Campo.NOMBRE];
                    aux.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCRIPCION];
-                   aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2);
-                   aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
+                   aux.Precio = Math.Round(Convert.ToDecimal(datoSQL.Reader["Precio"]), 2);
+                    aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
                    
                    //**** MARCA ***** //
                    aux.MarcaInfo = new Marca();
@@ -426,7 +447,7 @@ namespace negocio
                     aux.Codigo = (string)datoSQL.Reader[Opciones.Campo.CODIGO];
                     aux.Nombre = (string)datoSQL.Reader[Opciones.Campo.NOMBRE];
                     aux.Descripcion = (string)datoSQL.Reader[Opciones.Campo.DESCRIPCION];
-                    aux.Precio = Math.Round((decimal)datoSQL.Reader["Precio"], 2); ;
+                    aux.Precio = Math.Round(Convert.ToDecimal(datoSQL.Reader["Precio"]), 2);
                     aux.ImagenURL = (string)datoSQL.Reader[Opciones.Campo.URLIMAGEN];
 
                     //**** MARCA ***** //
