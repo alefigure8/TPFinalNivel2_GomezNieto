@@ -187,6 +187,7 @@ namespace presentación
                 producto = new Producto();
             }
         }
+
         private void btnAgregarProducto_Click(object sender, EventArgs e)
         {
             //Habilitar campos para editar
