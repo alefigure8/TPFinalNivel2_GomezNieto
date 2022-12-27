@@ -67,6 +67,13 @@ namespace helper
             return criterioBusquedaNumero;
         }
 
+        public List<Producto> cargarProductos()
+        {
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            List<Producto> listaProducto = productoNegocio.listar();
+            return listaProducto;
+        }
+
         public List<Categoria> cargarCategorias (bool todos = false)
         {
             try
