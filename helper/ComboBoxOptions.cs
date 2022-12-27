@@ -1,5 +1,6 @@
 ﻿using configuracion;
 using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace helper
                 MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
         }
+
         public static void comboBoxCategoria(ComboBox combo, bool todos = false)
         {
             try
@@ -37,6 +39,13 @@ namespace helper
             {
                 MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
+        }
+
+        public static void comboBoxProductos(ComboBox combo)
+        {
+            listaDesplegable listaProducto = new listaDesplegable();
+            combo.DisplayMember = "Nombre";
+            combo.DataSource = listaProducto.cargarProductos().OrderBy(x => x.Nombre).ToList();
         }
 
         public static void comboBoxCamposBusquedaAvanzada(ComboBox combo)
