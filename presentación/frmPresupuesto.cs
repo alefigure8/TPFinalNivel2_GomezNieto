@@ -25,6 +25,7 @@ namespace presentación
         ProductoNegocio productoNegocio = null;
         bool GridViewOpen = false;
         Presupuesto auxModificar = null;
+        PrintPreviewDialog printPreview = null;
 
         public frmPresupuesto()
         {
@@ -156,14 +157,18 @@ namespace presentación
 
             if(string.IsNullOrEmpty(txtDescuento.Text))
             {
-                 lbPrecio.Text = totalPresupuesto.ToString("0.00");
+                lbDescuentoPrecio.Text = "";
+                lbPrecio.Text = totalPresupuesto.ToString("c");
             }
             else
             {
                 if(Validacion.esNumero(txtDescuento.Text))
                 {
                     decimal descuento = Convert.ToDecimal(txtDescuento.Text);
-                    lbPrecio.Text = (totalPresupuesto - ((descuento * totalPresupuesto) / 100)).ToString("0.00");
+                    decimal totalDescuento = ((descuento * totalPresupuesto) / 100);
+
+                    lbDescuentoPrecio.Text = "-" + (totalPresupuesto * descuento / 100).ToString("c");
+                    lbPrecio.Text = (totalPresupuesto - totalDescuento).ToString("c");
                 }
             }
 
@@ -205,32 +210,50 @@ namespace presentación
         private void btnFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            dialog.Filter = "png files (*.png)|*.png";
             dialog.FilterIndex = 2;
             dialog.Title = "Presupuesto";
             dialog.RestoreDirectory = true;
 
-            string value = "";
+            //string value = "";
 
-            value += "PRESUPUESTO";
-            value += "\t \t \t \t \t \t \t \t FECHA: " + fechaPresupuesto.Text + "\n \n"; 
-            
-            foreach(var item in listaPresupuesto)
-            {
-                value += $"{item.Nombre} - Cantidad: {item.cantidad} - Precio unitario: ${item.Precio} - SubTotal: ${item.total} \n";
-            }
+            //value += "PRESUPUESTO";
+            //value += "\t \t \t \t \t \t \t \t FECHA: " + fechaPresupuesto.Text + "\n \n"; 
 
-            value += "\n\n";
+            //foreach(var item in listaPresupuesto)
+            //{
+            //    value += $"{item.Nombre} - Cantidad: {item.cantidad} - Precio unitario: ${item.Precio} - SubTotal: ${item.total} \n";
+            //}
 
-            value += $"\t \t \t \t \t \t \t \t TOTAL A PAGAR: {lbPrecio.Text}";
+            //value += "\n\n";
 
-            
+            //value += $"\t \t \t \t \t \t \t \t TOTAL A PAGAR: {lbPrecio.Text}";
+
+            printPresupuesto = new PrintDocument();
+            PrinterSettings printerSetting = new PrinterSettings();
+            printPresupuesto.PrinterSettings = printerSetting;
+            printPresupuesto.PrintPage += printPresupuesto_PrintPage;
+
+            printPreview = new PrintPreviewDialog();
+            printPreview.MinimumSize = new Size(375, 250);
+            printPreview.SetBounds(100, -550, 800, 800);
+            printPreview.Document = printPresupuesto;
+
+
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 string fileName = dialog.FileName;
-                StreamWriter sw = new StreamWriter(fileName);
-                sw.WriteLine(value);
-                sw.Close();
+                //StreamWriter sw = new StreamWriter(fileName);
+                //sw.WriteLine(value);
+                //sw.Close();
+
+
+                Bitmap pic = new Bitmap(printPreview.Width, printPreview.Height);
+                using (Graphics g = Graphics.FromImage(pic))
+                {
+                    printPreview.DrawToBitmap(pic, new Rectangle(0, 0, pic.Width, pic.Height));
+                    pic.Save(fileName, ImageFormat.Png);
+                }
             }
         }
 
@@ -239,21 +262,27 @@ namespace presentación
             Font font = new Font("Tahoma", 18, FontStyle.Bold);
             Font fontProductos = new Font("Tahoma", 14);
             int width = 800;
-            int y = 80;
-            Bitmap myBitmap = new Bitmap(@"C:\imageApp\logo.png");
+            int y = 150;
+            Bitmap myBitmap = new Bitmap(@"C:\imageApp\logo_generic.jpg");
             
-            e.Graphics.DrawImage(myBitmap, new Rectangle(400, 20, 50, 50));
+            e.Graphics.DrawImage(myBitmap, new Rectangle(300, 20, 250, 75));
             e.Graphics.DrawString("PRESUPUESTO", font, Brushes.Black, new RectangleF(40, y, width, 40 ));
             e.Graphics.DrawString($"FECHA: {fechaPresupuesto.Text}", font, Brushes.Black, new RectangleF(550, y, width, 40 ));
 
-            y += 40;
+            y += 80;
 
             foreach(var item in listaPresupuesto)
             {
                 e.Graphics.DrawString($"{item.Nombre} - Precio: ${item.Precio} - Cantidad {item.cantidad} - Total ${item.total}", fontProductos, Brushes.Black, new RectangleF(40, y += 20, width, 20));
             }
+
+            y += 80;
+
+            e.Graphics.DrawString($"DESCUENTO: {lbDescuentoPrecio.Text}", font, Brushes.Black, new RectangleF(450, y, width, 40));
+
             y += 40;
-            e.Graphics.DrawString($"TOTAL: {lbPrecio.Text}", font, Brushes.Black, new RectangleF(550, y, width, 40));
+
+            e.Graphics.DrawString($"TOTAL: {lbPrecio.Text}", font, Brushes.Black, new RectangleF(450, y, width, 40));
         }
 
         private void btnPrinter_Click(object sender, EventArgs e)
@@ -267,7 +296,7 @@ namespace presentación
             printPresupuesto.PrinterSettings = printerSetting;
             printPresupuesto.PrintPage += printPresupuesto_PrintPage;
 
-            PrintPreviewDialog printPreview = new PrintPreviewDialog();
+            printPreview = new PrintPreviewDialog();
             printPreview.MinimumSize = new Size(375, 250);
             printPreview.SetBounds(100, -550, 800, 800);
             printPreview.Document = printPresupuesto;
