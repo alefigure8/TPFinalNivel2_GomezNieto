@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Drawing;
+
 namespace presentación.Properties
 {
 
@@ -33,6 +35,8 @@ namespace presentación.Properties
         internal Resources()
         {
         }
+
+        public static Image PrintIcon { get; internal set; }
 
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
