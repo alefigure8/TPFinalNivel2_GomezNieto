@@ -94,5 +94,6 @@ namespace configuracion
             public const string CANCELAR = "Cancelar";
             public const string REGRESAR = "Regresar";
         }
+
     }
 }
