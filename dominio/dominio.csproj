@@ -47,5 +47,11 @@
     <Compile Include="Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\configuracion\configuracion.csproj">
+      <Project>{95fb165b-2054-4fdc-b799-e452d9f6d2cd}</Project>
+      <Name>configuracion</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
