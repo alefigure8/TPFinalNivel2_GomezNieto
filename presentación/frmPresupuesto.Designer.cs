@@ -85,7 +85,7 @@
             this.lbTituloPresupuesto.Location = new System.Drawing.Point(37, 47);
             this.lbTituloPresupuesto.Name = "lbTituloPresupuesto";
             this.lbTituloPresupuesto.Size = new System.Drawing.Size(168, 25);
-            this.lbTituloPresupuesto.TabIndex = 1;
+            this.lbTituloPresupuesto.TabIndex = 2;
             this.lbTituloPresupuesto.Text = "PRESUPUESTO";
             // 
             // lbPrespuestoArticulo
@@ -109,7 +109,7 @@
             0});
             this.numericPrespuesto.Name = "numericPrespuesto";
             this.numericPrespuesto.Size = new System.Drawing.Size(41, 20);
-            this.numericPrespuesto.TabIndex = 4;
+            this.numericPrespuesto.TabIndex = 1;
             this.numericPrespuesto.Value = new decimal(new int[] {
             1,
             0,
@@ -127,7 +127,7 @@
             this.btnAgregarPrespuesto.Location = new System.Drawing.Point(349, 14);
             this.btnAgregarPrespuesto.Name = "btnAgregarPrespuesto";
             this.btnAgregarPrespuesto.Size = new System.Drawing.Size(27, 23);
-            this.btnAgregarPrespuesto.TabIndex = 9;
+            this.btnAgregarPrespuesto.TabIndex = 2;
             this.btnAgregarPrespuesto.Text = "+";
             this.btnAgregarPrespuesto.UseVisualStyleBackColor = false;
             this.btnAgregarPrespuesto.Click += new System.EventHandler(this.btnAgregarPrespuesto_Click);
@@ -152,7 +152,7 @@
             this.cbAgregarPresupuesto.Location = new System.Drawing.Point(74, 16);
             this.cbAgregarPresupuesto.Name = "cbAgregarPresupuesto";
             this.cbAgregarPresupuesto.Size = new System.Drawing.Size(212, 21);
-            this.cbAgregarPresupuesto.TabIndex = 10;
+            this.cbAgregarPresupuesto.TabIndex = 0;
             // 
             // panelPrespuesto
             // 
@@ -199,7 +199,7 @@
             this.txtModificarPrecio.Location = new System.Drawing.Point(237, 261);
             this.txtModificarPrecio.Name = "txtModificarPrecio";
             this.txtModificarPrecio.Size = new System.Drawing.Size(48, 20);
-            this.txtModificarPrecio.TabIndex = 17;
+            this.txtModificarPrecio.TabIndex = 3;
             // 
             // numericModificarPresupuesto
             // 
@@ -211,7 +211,7 @@
             0});
             this.numericModificarPresupuesto.Name = "numericModificarPresupuesto";
             this.numericModificarPresupuesto.Size = new System.Drawing.Size(41, 20);
-            this.numericModificarPresupuesto.TabIndex = 11;
+            this.numericModificarPresupuesto.TabIndex = 4;
             this.numericModificarPresupuesto.Value = new decimal(new int[] {
             1,
             0,
@@ -229,7 +229,7 @@
             this.btnModificar.Location = new System.Drawing.Point(413, 259);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(77, 23);
-            this.btnModificar.TabIndex = 13;
+            this.btnModificar.TabIndex = 5;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -245,7 +245,7 @@
             this.btEliminarProducto.Location = new System.Drawing.Point(17, 259);
             this.btEliminarProducto.Name = "btEliminarProducto";
             this.btEliminarProducto.Size = new System.Drawing.Size(77, 23);
-            this.btEliminarProducto.TabIndex = 11;
+            this.btEliminarProducto.TabIndex = 2;
             this.btEliminarProducto.Text = "Borrar";
             this.btEliminarProducto.UseVisualStyleBackColor = false;
             this.btEliminarProducto.Click += new System.EventHandler(this.btEliminarProducto_Click);
@@ -318,7 +318,7 @@
             this.dgvPresupuesto.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvPresupuesto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPresupuesto.Size = new System.Drawing.Size(473, 193);
-            this.dgvPresupuesto.TabIndex = 11;
+            this.dgvPresupuesto.TabIndex = 1;
             this.dgvPresupuesto.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPresupuesto_CellContentClick);
             // 
             // lbAgregarPresupuesto
@@ -343,7 +343,7 @@
             this.btnAgregarGrid.Location = new System.Drawing.Point(16, 13);
             this.btnAgregarGrid.Name = "btnAgregarGrid";
             this.btnAgregarGrid.Size = new System.Drawing.Size(27, 23);
-            this.btnAgregarGrid.TabIndex = 10;
+            this.btnAgregarGrid.TabIndex = 0;
             this.btnAgregarGrid.Text = "+";
             this.btnAgregarGrid.UseVisualStyleBackColor = false;
             this.btnAgregarGrid.Click += new System.EventHandler(this.button1_Click);
@@ -378,7 +378,7 @@
             this.panelDescarga.Location = new System.Drawing.Point(553, 144);
             this.panelDescarga.Name = "panelDescarga";
             this.panelDescarga.Size = new System.Drawing.Size(212, 86);
-            this.panelDescarga.TabIndex = 12;
+            this.panelDescarga.TabIndex = 0;
             // 
             // btnExportar
             // 
@@ -453,7 +453,7 @@
             this.txtDescuento.Location = new System.Drawing.Point(104, 22);
             this.txtDescuento.Name = "txtDescuento";
             this.txtDescuento.Size = new System.Drawing.Size(48, 20);
-            this.txtDescuento.TabIndex = 14;
+            this.txtDescuento.TabIndex = 0;
             this.txtDescuento.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
@@ -464,7 +464,7 @@
             this.label1.Location = new System.Drawing.Point(158, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 14);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 1;
             this.label1.Text = "%";
             // 
             // printPresupuesto
@@ -492,7 +492,7 @@
             this.btnCargarArchivo.Location = new System.Drawing.Point(24, 15);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
             this.btnCargarArchivo.Size = new System.Drawing.Size(162, 23);
-            this.btnCargarArchivo.TabIndex = 20;
+            this.btnCargarArchivo.TabIndex = 0;
             this.btnCargarArchivo.Text = "Cargar Presupuesto";
             this.btnCargarArchivo.UseVisualStyleBackColor = false;
             this.btnCargarArchivo.Click += new System.EventHandler(this.btnCargarArchivo_Click);
