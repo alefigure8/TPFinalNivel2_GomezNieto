@@ -130,11 +130,13 @@ namespace presentación
                 {
                     //Producto Custom
                     Presupuesto aux = new Presupuesto();
+                    Marca marca = new Marca();
+                    Categoria categoria = new Categoria();
                     aux.Nombre = cbAgregarPresupuesto.Text;
-                    aux.Precio = 0;
                     aux.cantidad = 1;
                     aux.total = 0;
-                    aux.Descripcion = "SIN LISTAR";
+                    aux.MarcaInfo = marca;
+                    aux.CategoriaInfo = categoria;
                     listaPresupuesto.Add(aux);
 
                     cargarGridView();
@@ -154,11 +156,13 @@ namespace presentación
             panelPrecioTotal.Visible = isOpen;
             fechaPresupuesto.Visible = isOpen;
             panelCargarArchivo.Visible = isOpen;
+            btnAgregarPrespuesto.Visible = isOpen;
 
             if(isOpen)
             {
                 lbAgregarPresupuesto.Text = "PRESUPUESTO";
                 panelPrespuesto.Height = 300;
+                panelBuscadorPresupuesto.Width = 396;
                 btnAgregarGrid.Text = "-";
             }
             else
@@ -166,6 +170,7 @@ namespace presentación
                 lbAgregarPresupuesto.Text = "Iniciar nuevo presupuesto";
                 btnAgregarGrid.Text = "+";
                 panelPrespuesto.Height = 50;
+                panelBuscadorPresupuesto.Width = 350;
                 dgvPresupuesto.DataSource = null;
                 lbDescuentoPrecio.Text = "";
                 lbPrecio.Text = "";
@@ -219,8 +224,18 @@ namespace presentación
         {
             dgvPresupuesto.DataSource = null;
             dgvPresupuesto.DataSource = listaPresupuesto;
+
             dgvPresupuesto.Columns[Opciones.Campo.ID].Visible = false;
             dgvPresupuesto.Columns[Opciones.Campo.URLIMAGEN].Visible = false;
+            dgvPresupuesto.Columns[Opciones.Campo.CODIGO].DisplayIndex = 0;
+            dgvPresupuesto.Columns[Opciones.Campo.NOMBRE].DisplayIndex = 1;
+            dgvPresupuesto.Columns[Opciones.Campo.DESCRIPCION].DisplayIndex = 2;
+            dgvPresupuesto.Columns["CategoriaInfo"].DisplayIndex = 3;
+            dgvPresupuesto.Columns["MarcaInfo"].DisplayIndex = 4;
+            dgvPresupuesto.Columns[Opciones.Campo.PRECIO].DisplayIndex = 5;
+            dgvPresupuesto.Columns["Cantidad"].DisplayIndex = 6;
+            dgvPresupuesto.Columns["Total"].DisplayIndex = 7;
+
             dgvPresupuesto.EnableHeadersVisualStyles = false;
         }
 
@@ -259,7 +274,7 @@ namespace presentación
 
         private void btnFile_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog saveDialog = new SaveFileDialog() { Filter = "Excel|*.xlsx"})
+            using (SaveFileDialog saveDialog = new SaveFileDialog() { Filter = "Excel|*.xlsx", Title = "Guardar Presupuesto", FileName = $"Presupuesto - {DateTime.Now.ToString("dddd, dd MMMM yyyy")}"})
             {
                 //Validar si el gridView está vacío
                 if(listaPresupuesto.Count() == 0)
@@ -279,18 +294,20 @@ namespace presentación
 
                     int index = 6;
 
-                    //Columns
+                    //Logo de la empresa
+                    string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+                    ws.Shapes.AddPicture(path + Opciones.Folder.LOGO, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 180, 15, 100, 35);
+                    
+                    //Header Documento
                     Range formatRange;
                     formatRange = ws.get_Range("a2");
                     formatRange.Font.Size = 16;
                     formatRange.EntireRow.Font.Bold = true;
-
-                    ws.Shapes.AddPicture(@"C:\imageApp\logo_generic.jpg", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 180, 15, 100, 35);
-
                     ws.Cells[2, 1] = "PRESUPUESTO";
                     ws.Cells[2, 7] = "FECHA";
                     ws.Cells[2, 8] = fechaPresupuesto.Text.ToString();
 
+                    //Header de la Grilla
                     formatRange = ws.get_Range("a5", $"h5");
                     formatRange.BorderAround(XlLineStyle.xlContinuous,
                     XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic,
@@ -307,6 +324,7 @@ namespace presentación
                     ws.Cells[5, 7] = "Cantidad";
                     ws.Cells[5, 8] = "Precio Total";
 
+                    //Lista de Productos
                     foreach (var item in listaPresupuesto)
                     {
                         ws.Cells[index, 1] = item.Codigo;
@@ -321,39 +339,41 @@ namespace presentación
                         index++;
                     }
 
+                    //Recuadro a la grilla
                     formatRange = ws.get_Range("a6", $"h{index - 1}");
                     formatRange.BorderAround(XlLineStyle.xlContinuous,
                     XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic,
                     XlColorIndex.xlColorIndexAutomatic);
 
+                    //Calculos de totales y descuentos
                     decimal total = listaPresupuesto.Sum(x => x.total);
-                    decimal descuento = (total * Convert.ToDecimal(txtDescuento.Text)) / 100;
+                    decimal descuento = String.IsNullOrEmpty(txtDescuento.Text) ? 0 : (total * Convert.ToDecimal(txtDescuento.Text)) / 100;
 
+                    // Total
                     index += 2;
-                    formatRange = ws.get_Range($"a{index}");
-                    formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7].Font.Bold = true;
                     ws.Cells[index, 7] = "TOTAL";
                     ws.Cells[index, 8] = total;
                     ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
 
+                    //Porcentaje Descuento
                     index++;
-                    formatRange = ws.get_Range($"a{index}");
-                    formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7].Font.Bold = true;
                     ws.Cells[index, 7] = "PORCENTAJE";
                     ws.Cells[index, 8] = txtDescuento.Text;
+                    ws.Cells[index, 8].Style.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignRight;
                     ws.Cells[index, 8].NumberFormat = "@";
 
+                    //Total Descuento
                     index++;
-                    formatRange = ws.get_Range($"a{index}");
-                    formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7].Font.Bold = true;
                     ws.Cells[index, 7] = "DESCUENTO";
                     ws.Cells[index, 8] = descuento;
                     ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
 
+                    //Total a Pagar
                     index++;
-                    formatRange = ws.get_Range($"a{index}");
-                    formatRange.EntireRow.Font.Bold = true;
-                    formatRange.Font.Size = 16;
+                    ws.Cells[index, 7].Font.Bold = true;
                     ws.Cells[index, 7] = "TOTAL";
                     ws.Cells[index, 8] = total - descuento;
                     ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
@@ -362,6 +382,7 @@ namespace presentación
                     try
                     {
                         ws.SaveAs(fileName, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, true, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
+                        MessageBox.Show("El archivo se ha guardado con éxito");
                     }
                     catch (Exception)
                     {
@@ -381,7 +402,9 @@ namespace presentación
             int width = 800;
             int y = 150;
 
-            Bitmap myBitmap = new Bitmap(@"C:\imageApp\logo_generic.jpg");
+            //Logo de la empresa
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            Bitmap myBitmap = new Bitmap(path + Opciones.Folder.LOGO);
             
             e.Graphics.DrawImage(myBitmap, new System.Drawing.Rectangle(300, 20, 250, 75));
             e.Graphics.DrawString("PRESUPUESTO", font, Brushes.Black, new RectangleF(40, y, width, 40 ));
