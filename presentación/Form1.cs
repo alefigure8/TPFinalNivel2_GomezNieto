@@ -1,4 +1,5 @@
-﻿using System;
+﻿using configuracion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -28,12 +29,20 @@ namespace presentación
             screen.MdiParent = this;
             screen.Show();
             propiedadesBtn();
-            cargarFecha();
+            cargarFecha(); 
+            cargarImagenes();
         }
 
         private void cargarFecha()
         {
             lbFecha.Text = DateTime.Now.ToLongDateString();
+        }
+
+        private void cargarImagenes()
+        {
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            picLogo.Load(path + Opciones.Folder.ICONO);
+            this.Icon = new Icon(path + Opciones.Folder.ICONO);
         }
 
         protected override void OnLoad(EventArgs e)
