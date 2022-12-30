@@ -11,6 +11,7 @@ using negocio;
 using dominio;
 using helper;
 using configuracion;
+using System.IO;
 
 namespace presentación
 {
@@ -41,6 +42,7 @@ namespace presentación
                 cargarGridView();
                 cantidadEncontrada();
                 cargarComboBox();
+                cargarImagenes();
 
                 //Panel busqueda avanzada tamaño minimozado
                 if (!checlBusquedaAvanzada.Checked)
@@ -52,6 +54,15 @@ namespace presentación
             {
                 MessageBox.Show(Opciones.MensajeError.PRODUCTOERROR);
             }
+        }
+
+        private void cargarImagenes()
+        {
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            btnFirst.Load(path + Opciones.Folder.PRIMERO);
+            btnLast.Load(path + Opciones.Folder.ULTIMA);
+            btnNext.Load(path + Opciones.Folder.SIGUIENTE);
+            btnPreview.Load(path + Opciones.Folder.ANTERIOR); 
         }
 
         private void cargarComboBox()
@@ -293,8 +304,8 @@ namespace presentación
                 string filtro = txtBoxSearch.Text;
                 string campo = cbCampo.SelectedItem.ToString();
                 string criterio = cbCriterio.SelectedItem.ToString();
-                string marca = cbMarca.SelectedItem.ToString() == "Todos" ? "" : cbMarca.SelectedItem.ToString();
-                string categoria = cbCategoria.SelectedItem.ToString() == "Todos" ? "" : cbCategoria.SelectedItem.ToString();
+                string marca = cbMarca.SelectedItem.ToString() == Opciones.Buscador.TODOS ? "" : cbMarca.SelectedItem.ToString();
+                string categoria = cbCategoria.SelectedItem.ToString() == Opciones.Buscador.TODOS ? "" : cbCategoria.SelectedItem.ToString();
 
             // Validar si es numero
             if (validarNumeros())
