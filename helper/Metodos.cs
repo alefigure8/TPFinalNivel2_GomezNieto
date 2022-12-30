@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
+using configuracion;
 
 namespace helper
 {
@@ -14,12 +15,20 @@ namespace helper
     {
         static public void copiarImagen(Producto producto, OpenFileDialog file, TextBox txtImagen)
         {
-            string path = ConfigurationManager.AppSettings["images-folder"] + file.SafeFileName;
+            string path = ConfigurationManager.AppSettings[Opciones.Folder.IMAGE];
+            //string path = Path.GetDirectoryName(Application.StartupPath) + Opciones.Folder.IMAGE + file.SafeFileName;
+            //Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.IMAGE
+            Console.WriteLine(path);
+            if (!Directory.Exists(path))
+            {                                      
+                Directory.CreateDirectory(path);
+            }
+
             try
             {
-                File.Copy(file.FileName, path);
-                producto.ImagenURL = path;
-                txtImagen.Text = path;
+                File.Copy(file.FileName, path + file.SafeFileName);
+                producto.ImagenURL = path + file.SafeFileName;
+                txtImagen.Text = path + file.SafeFileName;
             }
             catch (Exception ex)
             {
@@ -27,10 +36,10 @@ namespace helper
 
                 if (result == DialogResult.OK)
                 {
-                    File.Delete(path);
-                    File.Copy(file.FileName, path);
-                    producto.ImagenURL = path;
-                    txtImagen.Text = path;
+                    File.Delete(path + file.SafeFileName);
+                    File.Copy(file.FileName, path + file.SafeFileName);
+                    producto.ImagenURL = path + file.SafeFileName;
+                    txtImagen.Text = path + file.SafeFileName;
                 }
                 else
                 {
@@ -66,8 +75,8 @@ namespace helper
             }
             catch (Exception ex)
             {
-                string imgPlaceholder = ConfigurationManager.AppSettings["images-folder"] + "imgPlaceholder.jpg";
-                pictureBox.Load(imgPlaceholder);
+                string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+                pictureBox.Load(path + Opciones.Folder.PLACEHOLDER);
             }
         }
 
