@@ -23,6 +23,13 @@ namespace configuracion
              public const string GUARDARARCHIVO = "folder_medium_icon.png";
              public const string EXPORTAR = "export_medium_icon.png";
              public const string CONFIGURACION = "configure.png";
+             public const string LOGO = "logo_generic.jpg";
+             public const string ELIMINAR = "delete.png";
+             public const string VERSION = "version_fill.png";
+             public const string AUTOR = "user_3_fill.png";
+             public const string GITHUB = "github_fill.png";
+             public const string WEB = "web_fill.png";
+             public const string MAIL = "mail_fill.png";
         }
         public struct Buscador
         {
@@ -91,6 +98,7 @@ namespace configuracion
             public const string ADELANTE = "Adelante";
             public const string ATRAS = "Atrás";
             public const string PAGINA = "Página";
+            public const string PRIMERA = "Primera";
         }
 
         public struct PaginacionControl
