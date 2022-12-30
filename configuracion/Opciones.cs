@@ -9,6 +9,26 @@ namespace configuracion
 {
     public static class Opciones
     {
+        public struct Folder
+        {
+             public const string IMAGE = "imageApp";
+             public const string ROOTIMAGE = @"\img\";
+             public const string ICONO = "logo_main.ico";
+             public const string PRIMERO = "back_2_fill.png";
+             public const string ANTERIOR = "left_fill.png";
+             public const string SIGUIENTE = "right_fill.png";
+             public const string ULTIMA = "forward_2_fill.png";
+             public const string PLACEHOLDER = "imgPlaceholder.jpg";
+             public const string IMPRIMIR = "printer_medium_icon.png";
+             public const string GUARDARARCHIVO = "folder_medium_icon.png";
+             public const string EXPORTAR = "export_medium_icon.png";
+             public const string CONFIGURACION = "configure.png";
+        }
+        public struct Buscador
+        {
+            public const string TODOS = ".Todos";
+        }
+
         public struct Campo
         {
             public const string NOMBRE = "Nombre";
