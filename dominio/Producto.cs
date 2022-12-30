@@ -23,5 +23,14 @@ namespace dominio
         public Categoria CategoriaInfo{ get; set; }
 
         public decimal Precio { get; set; }
+
+        public Producto()
+        { 
+            this.Codigo = String.Empty;
+            this.Nombre = String.Empty;
+            this.Descripcion = String.Empty;
+            this.ImagenURL = String.Empty;
+            this.Precio = 0;
+        }
     }
 }
