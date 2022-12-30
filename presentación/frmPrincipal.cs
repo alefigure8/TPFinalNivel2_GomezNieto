@@ -12,6 +12,7 @@ using dominio;
 using helper;
 using configuracion;
 using System.IO;
+using Microsoft.Office.Interop.Excel;
 
 namespace presentación
 {
@@ -185,6 +186,11 @@ namespace presentación
                     if (pagina > total)
                         pagina = total;
                 }
+                else if(direccion == Opciones.Paginacion.PRIMERA)
+                {
+                    if (pagina < 0)
+                        pagina = 0;
+                }
                 //Anterior
                 else
                 {
@@ -268,7 +274,7 @@ namespace presentación
         {
             //Primera Pagina
             pagina = 0;
-            paginacionProductos();
+            paginacionProductos(Opciones.Paginacion.PRIMERA);
         }
 
         private void dgvProductos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -373,6 +379,54 @@ namespace presentación
             {
                 var cell = dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 cell.ToolTipText = "Doble click para acceder a la descripción";
+            }
+        }
+
+        private void btnCSV_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog() { Filter = "Excel|*.csv", Title = "Guardar Presupuesto", FileName = $"Productos - {DateTime.Now.ToString("dddd, dd MMMM yyyy")}" })
+            {
+                //Validar si el gridView está vacío
+                if (listaProductos.Count() == 0)
+                {
+                    MessageBox.Show("Selecciones algunos productos antes de generar un archivo");
+                    return;
+                }
+
+                //Generar archivo
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fileName = saveDialog.FileName;
+
+                    string csv = string.Empty;
+
+                    //Add the Header row for CSV file.
+                    csv += $"Id,Codigo,Nombre,Descripcion,Precio,ImagenURL,MarcaInfo.Id,MarcaInfo.Descripcion,CategoriaInfo.Id,CategoriaInfo.Descripcion";
+
+                    //Add new line.
+                    csv += "\r\n";
+
+                    //Adding the Rows
+                    foreach (var item in listaProductos)
+                    {
+
+                        //Add the Data rows.
+                        csv += $"{item.Id},{item.Codigo},{item.Nombre},{item.Descripcion},{item.Precio.ToString().Replace(",", ";")},{item.ImagenURL},{item.MarcaInfo.Id},{item.MarcaInfo.Descripcion},{item.CategoriaInfo.Id},{item.CategoriaInfo.Descripcion}";
+
+                        //Add new line.
+                        csv += "\r\n";
+                    }
+
+                    //Guardar
+                    try
+                    {
+                       File.WriteAllText(fileName, csv);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("El archivo no se pudo guardar");
+                    }
+                }
             }
         }
     }
