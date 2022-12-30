@@ -84,7 +84,7 @@ namespace helper
                 if (todos)
                 {
                     Categoria OpcionTodos = new Categoria();
-                    OpcionTodos.Descripcion = "Todos";
+                    OpcionTodos.Descripcion = Opciones.Buscador.TODOS;
                     OpcionTodos.Id = 0;
                     aux.Insert(0, OpcionTodos);
                 }
@@ -107,7 +107,7 @@ namespace helper
                 if(todos)
                 {
                     Marca OpcionTodos = new Marca();
-                    OpcionTodos.Descripcion = "Todos";
+                    OpcionTodos.Descripcion = Opciones.Buscador.TODOS;
                     OpcionTodos.Id = 0;
                     aux.Insert(0, OpcionTodos);
                 }
