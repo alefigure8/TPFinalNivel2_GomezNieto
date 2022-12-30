@@ -35,7 +35,6 @@ namespace presentación
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.labelFrmPrincipalCatalogo = new System.Windows.Forms.Label();
             this.lbShow = new System.Windows.Forms.Label();
@@ -216,7 +215,6 @@ namespace presentación
             // btnNext
             // 
             this.btnNext.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNext.Image = ((System.Drawing.Image)(resources.GetObject("btnNext.Image")));
             this.btnNext.Location = new System.Drawing.Point(339, 385);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(11, 16);
@@ -228,7 +226,6 @@ namespace presentación
             // btnLast
             // 
             this.btnLast.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLast.Image = ((System.Drawing.Image)(resources.GetObject("btnLast.Image")));
             this.btnLast.Location = new System.Drawing.Point(356, 385);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(18, 16);
@@ -240,7 +237,6 @@ namespace presentación
             // btnFirst
             // 
             this.btnFirst.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFirst.Image = ((System.Drawing.Image)(resources.GetObject("btnFirst.Image")));
             this.btnFirst.Location = new System.Drawing.Point(235, 385);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(18, 16);
@@ -252,7 +248,6 @@ namespace presentación
             // btnPreview
             // 
             this.btnPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
             this.btnPreview.Location = new System.Drawing.Point(259, 385);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(11, 16);

@@ -331,7 +331,6 @@
             // btnConfigureMarca
             // 
             this.btnConfigureMarca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
-            this.btnConfigureMarca.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConfigureMarca.BackgroundImage")));
             this.btnConfigureMarca.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnConfigureMarca.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfigureMarca.FlatAppearance.BorderSize = 0;
@@ -370,7 +369,6 @@
             // btnConfigureCategoria
             // 
             this.btnConfigureCategoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
-            this.btnConfigureCategoria.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConfigureCategoria.BackgroundImage")));
             this.btnConfigureCategoria.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnConfigureCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnConfigureCategoria.FlatAppearance.BorderSize = 0;

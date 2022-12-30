@@ -32,6 +32,7 @@ namespace presentación
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(presentacion));
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.lbFecha = new System.Windows.Forms.Label();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.sidePanel = new System.Windows.Forms.Panel();
             this.panelBtnPresupuesto = new System.Windows.Forms.Panel();
@@ -40,7 +41,6 @@ namespace presentación
             this.panelBtnPrincipal = new System.Windows.Forms.Panel();
             this.btnAbout = new System.Windows.Forms.Button();
             this.btnCatalogo = new System.Windows.Forms.Button();
-            this.lbFecha = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.sidePanel.SuspendLayout();
@@ -59,10 +59,20 @@ namespace presentación
             this.headerPanel.Size = new System.Drawing.Size(1079, 88);
             this.headerPanel.TabIndex = 5;
             // 
+            // lbFecha
+            // 
+            this.lbFecha.AutoSize = true;
+            this.lbFecha.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbFecha.Location = new System.Drawing.Point(846, 9);
+            this.lbFecha.Name = "lbFecha";
+            this.lbFecha.Size = new System.Drawing.Size(221, 16);
+            this.lbFecha.TabIndex = 1;
+            this.lbFecha.Text = "viernes, 00 de diciembre de 2022";
+            // 
             // picLogo
             // 
             this.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.InitialImage = null;
             this.picLogo.Location = new System.Drawing.Point(30, 7);
             this.picLogo.Name = "picLogo";
@@ -170,17 +180,6 @@ namespace presentación
             this.btnCatalogo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCatalogo.UseVisualStyleBackColor = false;
             this.btnCatalogo.Click += new System.EventHandler(this.btnCatalogo_Click);
-            // 
-            // lbFecha
-            // 
-            this.lbFecha.AutoSize = true;
-            this.lbFecha.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbFecha.Location = new System.Drawing.Point(846, 9);
-            this.lbFecha.Name = "lbFecha";
-            this.lbFecha.Size = new System.Drawing.Size(221, 16);
-            this.lbFecha.TabIndex = 1;
-            this.lbFecha.Text = "viernes, 00 de diciembre de 2022";
             // 
             // presentacion
             // 

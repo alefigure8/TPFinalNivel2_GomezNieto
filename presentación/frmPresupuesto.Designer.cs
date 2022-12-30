@@ -33,7 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPresupuesto));
             this.lbTituloPresupuesto = new System.Windows.Forms.Label();
             this.lbPrespuestoArticulo = new System.Windows.Forms.Label();
             this.numericPrespuesto = new System.Windows.Forms.NumericUpDown();
@@ -41,6 +40,9 @@
             this.panelBuscadorPresupuesto = new System.Windows.Forms.Panel();
             this.cbAgregarPresupuesto = new System.Windows.Forms.ComboBox();
             this.panelPrespuesto = new System.Windows.Forms.Panel();
+            this.lbModificarcantidad = new System.Windows.Forms.Label();
+            this.lbModificarPrecio = new System.Windows.Forms.Label();
+            this.txtModificarPrecio = new System.Windows.Forms.TextBox();
             this.numericModificarPresupuesto = new System.Windows.Forms.NumericUpDown();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btEliminarProducto = new System.Windows.Forms.Button();
@@ -51,28 +53,28 @@
             this.lbPrecio = new System.Windows.Forms.Label();
             this.lbTotal = new System.Windows.Forms.Label();
             this.panelDescarga = new System.Windows.Forms.Panel();
+            this.btnExportar = new System.Windows.Forms.PictureBox();
             this.btnPrinter = new System.Windows.Forms.PictureBox();
             this.btnFile = new System.Windows.Forms.PictureBox();
             this.panelPrecioTotal = new System.Windows.Forms.Panel();
+            this.lbDescuentoPrecio = new System.Windows.Forms.Label();
             this.lbDescueto = new System.Windows.Forms.Label();
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.printPresupuesto = new System.Drawing.Printing.PrintDocument();
-            this.lbDescuentoPrecio = new System.Windows.Forms.Label();
-            this.btnExportar = new System.Windows.Forms.PictureBox();
-            this.txtModificarPrecio = new System.Windows.Forms.TextBox();
-            this.lbModificarPrecio = new System.Windows.Forms.Label();
-            this.lbModificarcantidad = new System.Windows.Forms.Label();
+            this.panelCargarArchivo = new System.Windows.Forms.Panel();
+            this.btnCargarArchivo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericPrespuesto)).BeginInit();
             this.panelBuscadorPresupuesto.SuspendLayout();
             this.panelPrespuesto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericModificarPresupuesto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPresupuesto)).BeginInit();
             this.panelDescarga.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExportar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrinter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile)).BeginInit();
             this.panelPrecioTotal.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExportar)).BeginInit();
+            this.panelCargarArchivo.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbTituloPresupuesto
@@ -169,6 +171,35 @@
             this.panelPrespuesto.Name = "panelPrespuesto";
             this.panelPrespuesto.Size = new System.Drawing.Size(505, 294);
             this.panelPrespuesto.TabIndex = 11;
+            // 
+            // lbModificarcantidad
+            // 
+            this.lbModificarcantidad.AutoSize = true;
+            this.lbModificarcantidad.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbModificarcantidad.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbModificarcantidad.Location = new System.Drawing.Point(298, 263);
+            this.lbModificarcantidad.Name = "lbModificarcantidad";
+            this.lbModificarcantidad.Size = new System.Drawing.Size(62, 14);
+            this.lbModificarcantidad.TabIndex = 19;
+            this.lbModificarcantidad.Text = "Cantidad";
+            // 
+            // lbModificarPrecio
+            // 
+            this.lbModificarPrecio.AutoSize = true;
+            this.lbModificarPrecio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbModificarPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbModificarPrecio.Location = new System.Drawing.Point(187, 263);
+            this.lbModificarPrecio.Name = "lbModificarPrecio";
+            this.lbModificarPrecio.Size = new System.Drawing.Size(44, 14);
+            this.lbModificarPrecio.TabIndex = 18;
+            this.lbModificarPrecio.Text = "Precio";
+            // 
+            // txtModificarPrecio
+            // 
+            this.txtModificarPrecio.Location = new System.Drawing.Point(237, 261);
+            this.txtModificarPrecio.Name = "txtModificarPrecio";
+            this.txtModificarPrecio.Size = new System.Drawing.Size(48, 20);
+            this.txtModificarPrecio.TabIndex = 17;
             // 
             // numericModificarPresupuesto
             // 
@@ -349,10 +380,20 @@
             this.panelDescarga.Size = new System.Drawing.Size(212, 86);
             this.panelDescarga.TabIndex = 12;
             // 
+            // btnExportar
+            // 
+            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExportar.Location = new System.Drawing.Point(24, 17);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(50, 50);
+            this.btnExportar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btnExportar.TabIndex = 2;
+            this.btnExportar.TabStop = false;
+            this.btnExportar.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // btnPrinter
             // 
             this.btnPrinter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrinter.Image = ((System.Drawing.Image)(resources.GetObject("btnPrinter.Image")));
             this.btnPrinter.Location = new System.Drawing.Point(136, 17);
             this.btnPrinter.Name = "btnPrinter";
             this.btnPrinter.Size = new System.Drawing.Size(50, 50);
@@ -364,7 +405,6 @@
             // btnFile
             // 
             this.btnFile.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFile.Image = ((System.Drawing.Image)(resources.GetObject("btnFile.Image")));
             this.btnFile.Location = new System.Drawing.Point(80, 17);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(50, 50);
@@ -382,10 +422,20 @@
             this.panelPrecioTotal.Controls.Add(this.label1);
             this.panelPrecioTotal.Controls.Add(this.lbPrecio);
             this.panelPrecioTotal.Controls.Add(this.lbTotal);
-            this.panelPrecioTotal.Location = new System.Drawing.Point(553, 236);
+            this.panelPrecioTotal.Location = new System.Drawing.Point(553, 289);
             this.panelPrecioTotal.Name = "panelPrecioTotal";
             this.panelPrecioTotal.Size = new System.Drawing.Size(212, 116);
             this.panelPrecioTotal.TabIndex = 13;
+            // 
+            // lbDescuentoPrecio
+            // 
+            this.lbDescuentoPrecio.AutoSize = true;
+            this.lbDescuentoPrecio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDescuentoPrecio.ForeColor = System.Drawing.Color.LightGreen;
+            this.lbDescuentoPrecio.Location = new System.Drawing.Point(96, 59);
+            this.lbDescuentoPrecio.Name = "lbDescuentoPrecio";
+            this.lbDescuentoPrecio.Size = new System.Drawing.Size(0, 14);
+            this.lbDescuentoPrecio.TabIndex = 16;
             // 
             // lbDescueto
             // 
@@ -422,56 +472,30 @@
             this.printPresupuesto.OriginAtMargins = true;
             this.printPresupuesto.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printPresupuesto_PrintPage);
             // 
-            // lbDescuentoPrecio
+            // panelCargarArchivo
             // 
-            this.lbDescuentoPrecio.AutoSize = true;
-            this.lbDescuentoPrecio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDescuentoPrecio.ForeColor = System.Drawing.Color.LightGreen;
-            this.lbDescuentoPrecio.Location = new System.Drawing.Point(96, 59);
-            this.lbDescuentoPrecio.Name = "lbDescuentoPrecio";
-            this.lbDescuentoPrecio.Size = new System.Drawing.Size(0, 14);
-            this.lbDescuentoPrecio.TabIndex = 16;
+            this.panelCargarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(79)))));
+            this.panelCargarArchivo.Controls.Add(this.btnCargarArchivo);
+            this.panelCargarArchivo.Location = new System.Drawing.Point(553, 235);
+            this.panelCargarArchivo.Name = "panelCargarArchivo";
+            this.panelCargarArchivo.Size = new System.Drawing.Size(212, 50);
+            this.panelCargarArchivo.TabIndex = 14;
             // 
-            // btnExportar
+            // btnCargarArchivo
             // 
-            this.btnExportar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.Location = new System.Drawing.Point(24, 17);
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(50, 50);
-            this.btnExportar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btnExportar.TabIndex = 2;
-            this.btnExportar.TabStop = false;
-            this.btnExportar.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // txtModificarPrecio
-            // 
-            this.txtModificarPrecio.Location = new System.Drawing.Point(237, 261);
-            this.txtModificarPrecio.Name = "txtModificarPrecio";
-            this.txtModificarPrecio.Size = new System.Drawing.Size(48, 20);
-            this.txtModificarPrecio.TabIndex = 17;
-            // 
-            // lbModificarPrecio
-            // 
-            this.lbModificarPrecio.AutoSize = true;
-            this.lbModificarPrecio.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbModificarPrecio.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbModificarPrecio.Location = new System.Drawing.Point(187, 263);
-            this.lbModificarPrecio.Name = "lbModificarPrecio";
-            this.lbModificarPrecio.Size = new System.Drawing.Size(44, 14);
-            this.lbModificarPrecio.TabIndex = 18;
-            this.lbModificarPrecio.Text = "Precio";
-            // 
-            // lbModificarcantidad
-            // 
-            this.lbModificarcantidad.AutoSize = true;
-            this.lbModificarcantidad.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbModificarcantidad.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbModificarcantidad.Location = new System.Drawing.Point(298, 263);
-            this.lbModificarcantidad.Name = "lbModificarcantidad";
-            this.lbModificarcantidad.Size = new System.Drawing.Size(62, 14);
-            this.lbModificarcantidad.TabIndex = 19;
-            this.lbModificarcantidad.Text = "Cantidad";
+            this.btnCargarArchivo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
+            this.btnCargarArchivo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCargarArchivo.FlatAppearance.BorderSize = 0;
+            this.btnCargarArchivo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCargarArchivo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCargarArchivo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCargarArchivo.Location = new System.Drawing.Point(24, 15);
+            this.btnCargarArchivo.Name = "btnCargarArchivo";
+            this.btnCargarArchivo.Size = new System.Drawing.Size(162, 23);
+            this.btnCargarArchivo.TabIndex = 20;
+            this.btnCargarArchivo.Text = "Cargar Presupuesto";
+            this.btnCargarArchivo.UseVisualStyleBackColor = false;
+            this.btnCargarArchivo.Click += new System.EventHandler(this.btnCargarArchivo_Click);
             // 
             // frmPresupuesto
             // 
@@ -479,6 +503,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(86)))), ((int)(((byte)(111)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panelCargarArchivo);
             this.Controls.Add(this.panelPrecioTotal);
             this.Controls.Add(this.panelDescarga);
             this.Controls.Add(this.panelPrespuesto);
@@ -496,11 +521,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericModificarPresupuesto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPresupuesto)).EndInit();
             this.panelDescarga.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnExportar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPrinter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile)).EndInit();
             this.panelPrecioTotal.ResumeLayout(false);
             this.panelPrecioTotal.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExportar)).EndInit();
+            this.panelCargarArchivo.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -537,5 +563,7 @@
         private System.Windows.Forms.Label lbModificarcantidad;
         private System.Windows.Forms.Label lbModificarPrecio;
         private System.Windows.Forms.TextBox txtModificarPrecio;
+        private System.Windows.Forms.Panel panelCargarArchivo;
+        private System.Windows.Forms.Button btnCargarArchivo;
     }
 }
