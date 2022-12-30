@@ -18,6 +18,7 @@ using System.Drawing.Imaging;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using Microsoft.Office.Interop.Excel;
+using System.Data.OleDb;
 
 namespace presentación
 {
@@ -49,6 +50,7 @@ namespace presentación
 
             OptionGridViewOpen(GridViewOpen);
             opcionModificar();
+            cargarImagenes();
 
             ToolTip guardar = new ToolTip();
             guardar.SetToolTip(btnFile, "Guardar Excel");
@@ -56,6 +58,14 @@ namespace presentación
             imprimir.SetToolTip(btnPrinter, "Imprimir presupuesto");
             ToolTip exportar = new ToolTip();
             exportar.SetToolTip(btnExportar, "Copiar a Excel");
+        }
+
+        private void cargarImagenes()
+        {
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            btnExportar.Load(path + Opciones.Folder.EXPORTAR);
+            btnPrinter.Load(path + Opciones.Folder.IMPRIMIR);
+            btnFile.Load(path + Opciones.Folder.GUARDARARCHIVO);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -143,6 +153,7 @@ namespace presentación
             panelDescarga.Visible = isOpen;
             panelPrecioTotal.Visible = isOpen;
             fechaPresupuesto.Visible = isOpen;
+            panelCargarArchivo.Visible = isOpen;
 
             if(isOpen)
             {
@@ -165,12 +176,15 @@ namespace presentación
 
         private void btEliminarProducto_Click(object sender, EventArgs e)
         {
-            auxModificar = (Presupuesto)dgvPresupuesto.CurrentRow.DataBoundItem;
-            listaPresupuesto.Remove(auxModificar);
-            auxModificar = null;
+            if(listaPresupuesto.Count > 0)
+            {
+                auxModificar = (Presupuesto)dgvPresupuesto.CurrentRow.DataBoundItem;
+                listaPresupuesto.Remove(auxModificar);
+                auxModificar = null;
 
-            cargarGridView();
-            Total();
+                cargarGridView();
+                Total();
+            }
         }
 
         private void Total()
@@ -245,8 +259,16 @@ namespace presentación
 
         private void btnFile_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog saveDialog = new SaveFileDialog() { Filter = "Excel|*.xls"})
+            using (SaveFileDialog saveDialog = new SaveFileDialog() { Filter = "Excel|*.xlsx"})
             {
+                //Validar si el gridView está vacío
+                if(listaPresupuesto.Count() == 0)
+                {
+                    MessageBox.Show("Selecciones algunos productos antes de generar un archivo");
+                    return;
+                }
+
+                //Generar archivo
                 if(saveDialog.ShowDialog() == DialogResult.OK)
                 {
                     string fileName = saveDialog.FileName;
@@ -258,7 +280,6 @@ namespace presentación
                     int index = 6;
 
                     //Columns
-
                     Range formatRange;
                     formatRange = ws.get_Range("a2");
                     formatRange.Font.Size = 16;
@@ -267,7 +288,7 @@ namespace presentación
                     ws.Shapes.AddPicture(@"C:\imageApp\logo_generic.jpg", Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoCTrue, 180, 15, 100, 35);
 
                     ws.Cells[2, 1] = "PRESUPUESTO";
-                      ws.Cells[2, 7] = "FECHA";
+                    ws.Cells[2, 7] = "FECHA";
                     ws.Cells[2, 8] = fechaPresupuesto.Text.ToString();
 
                     formatRange = ws.get_Range("a5", $"h5");
@@ -305,18 +326,37 @@ namespace presentación
                     XlBorderWeight.xlMedium, XlColorIndex.xlColorIndexAutomatic,
                     XlColorIndex.xlColorIndexAutomatic);
 
-                    index += 2;
-                    formatRange = ws.get_Range($"a{index}");
-                    formatRange.EntireRow.Font.Bold = true;
-                    ws.Cells[index, 7] = "DESCUENTO";
-                    ws.Cells[index, 8] = lbDescuentoPrecio.Text.ToString();
+                    decimal total = listaPresupuesto.Sum(x => x.total);
+                    decimal descuento = (total * Convert.ToDecimal(txtDescuento.Text)) / 100;
 
                     index += 2;
                     formatRange = ws.get_Range($"a{index}");
                     formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7] = "TOTAL";
+                    ws.Cells[index, 8] = total;
+                    ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
+
+                    index++;
+                    formatRange = ws.get_Range($"a{index}");
+                    formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7] = "PORCENTAJE";
+                    ws.Cells[index, 8] = txtDescuento.Text;
+                    ws.Cells[index, 8].NumberFormat = "@";
+
+                    index++;
+                    formatRange = ws.get_Range($"a{index}");
+                    formatRange.EntireRow.Font.Bold = true;
+                    ws.Cells[index, 7] = "DESCUENTO";
+                    ws.Cells[index, 8] = descuento;
+                    ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
+
+                    index++;
+                    formatRange = ws.get_Range($"a{index}");
+                    formatRange.EntireRow.Font.Bold = true;
                     formatRange.Font.Size = 16;
                     ws.Cells[index, 7] = "TOTAL";
-                    ws.Cells[index, 8] = lbPrecio.Text.ToString();
+                    ws.Cells[index, 8] = total - descuento;
+                    ws.Cells[index, 8].NumberFormat = "[$$-en-US] #,##0.00";
 
                     //Guardar
                     try
@@ -372,12 +412,20 @@ namespace presentación
 
         private void btnPrinter_Click(object sender, EventArgs e)
         {
+            if(listaPresupuesto.Count() == 0)
+            {
+                MessageBox.Show("Pruebe cargando algunos productos antes de imprimir");
+                return;
+            }
+
             printPresupuesto = new PrintDocument();
             PrinterSettings printerSetting = new PrinterSettings();
             printPresupuesto.PrinterSettings = printerSetting;
             printPresupuesto.PrintPage += printPresupuesto_PrintPage;
 
             printPreview = new PrintPreviewDialog();
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            printPreview.Icon = new System.Drawing.Icon(path + Opciones.Folder.ICONO);
             printPreview.MinimumSize = new Size(375, 250);
             printPreview.SetBounds(100, -550, 800, 800);
             printPreview.Document = printPresupuesto;
@@ -411,6 +459,92 @@ namespace presentación
 
                 xlsheet.PasteSpecial(xlr, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
             }
+        }
+
+        private void btnCargarArchivo_Click(object sender, EventArgs e)
+        {
+            //cargar archivo
+            OpenFileDialog oFile = new OpenFileDialog();
+            oFile.Filter = "Excel Files | *.xls; *.xlsx; *.xlsm;";
+            oFile.Title = "Importar presupuesto";
+
+            if(oFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    importarPresupuestoExcel(oFile.FileName);
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Error al cargar Archivo");
+                }
+                cargarGridView();
+                Total();
+                opcionModificar();
+            }
+        }
+
+        List<Presupuesto> importarPresupuestoExcel(string path)
+        {
+            listaPresupuesto.Clear();
+
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Workbook xlWorkBook;
+            Worksheet xlWorkSheet;
+
+            int iRow;
+
+            xlWorkBook = xlApp.Workbooks.Open(path);         
+            xlWorkSheet = xlWorkBook.Worksheets["Hoja1"];
+
+            for (iRow = 6; iRow <= xlWorkSheet.Rows.Count; iRow++) 
+            {
+                if (xlWorkSheet.Cells[iRow, 1].value != null)
+                {
+                    try
+                    {
+                        Presupuesto aux = new Presupuesto();
+                        aux.Codigo = xlWorkSheet.Cells[iRow, 1].value;
+                        aux.Nombre = xlWorkSheet.Cells[iRow, 2].value;
+                        aux.Descripcion = xlWorkSheet.Cells[iRow, 3].value;
+                        Marca marca = new Marca();
+                        marca.Descripcion = xlWorkSheet.Cells[iRow, 4].value;
+                        aux.MarcaInfo = marca;
+                        Categoria categoria = new Categoria();
+                        categoria.Descripcion = xlWorkSheet.Cells[iRow, 5].value;
+                        aux.CategoriaInfo = categoria;
+                        aux.Precio = Convert.ToDecimal(xlWorkSheet.Cells[iRow, 6].value);
+                        aux.cantidad = Convert.ToInt32(xlWorkSheet.Cells[iRow, 7].value);
+                        aux.total = Convert.ToDecimal(xlWorkSheet.Cells[iRow, 8].value);
+                        listaPresupuesto.Add(aux);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+             iRow +=3;
+
+            if (xlWorkSheet.Cells[iRow, 8].value != null)
+            {
+                txtDescuento.Text = xlWorkSheet.Cells[iRow, 8].value.ToString();
+            }
+
+            Total();
+
+            xlWorkBook.Close();
+            xlApp.Quit();
+
+            return listaPresupuesto;
         }
     }
 }
