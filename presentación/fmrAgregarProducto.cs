@@ -4,6 +4,7 @@ using helper;
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -107,6 +108,12 @@ namespace presentación
             Metodos.cargarimagen(pbCargarProducto, productoAux.ImagenURL);
         }
 
+        private void cargarImagenes()
+        {
+            string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
+            btnConfigureCategoria.BackgroundImage = System.Drawing.Image.FromFile(path + Opciones.Folder.CONFIGURACION);
+            btnConfigureMarca.BackgroundImage = System.Drawing.Image.FromFile(path + Opciones.Folder.CONFIGURACION);
+        }
 
         //**** EVENTOS ****//
         private void fmrAgregarProducto_Load(object sender, EventArgs e)
@@ -136,6 +143,8 @@ namespace presentación
             listaMarca = marcaNegocio.listar();
             listaProducto = productoNegocio.listar();
             listaCategoria = categoriaNegocio.listar();
+
+            cargarImagenes();
 
             listaTxt = new List<TextBox>()
             {
