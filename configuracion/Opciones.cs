@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace configuracion
+﻿namespace configuracion
 {
     public static class Opciones
     {
@@ -31,6 +24,7 @@ namespace configuracion
              public const string WEB = "web_fill.png";
              public const string MAIL = "mail_fill.png";
         }
+
         public struct Buscador
         {
             public const string TODOS = ".Todos";
