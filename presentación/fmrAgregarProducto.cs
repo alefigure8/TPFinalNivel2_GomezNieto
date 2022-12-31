@@ -398,7 +398,7 @@ namespace presentación
                 try
                 {
                     MessageBoxButtons btnAgregar = MessageBoxButtons.OKCancel;
-                    DialogResult respuesta = MessageBox.Show($"¿Está seguro que quiere agregar a Marca {cbAgregarcategoria.Text}?", "Agregar Marca", btnAgregar);
+                    DialogResult respuesta = MessageBox.Show($"¿Está seguro que quiere agregar a Marca {cbAgregarMarca.Text}?", "Agregar Marca", btnAgregar);
 
                     if(respuesta == DialogResult.OK)
                     {
@@ -524,7 +524,5 @@ namespace presentación
             if (listaMarca != null)
              Metodos.buscarEnLista<Marca>(listaMarca, cbAgregarMarca, btnConfigureMarca);
         }
-
-
     }
 }
