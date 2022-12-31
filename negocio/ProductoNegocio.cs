@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using dominio;
 using configuracion;
-using static System.Net.Mime.MediaTypeNames;
-using System.Data.SqlTypes;
-using System.Text.RegularExpressions;
-using System.Collections;
 using System.Globalization;
 
 namespace negocio

@@ -280,7 +280,7 @@ namespace presentación
                             Metodos.copiarImagen(producto, file, txtAgregarImagen);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Cambie la imagen y luego intenté guardar nuevamente");
                         file = null;
@@ -296,7 +296,7 @@ namespace presentación
                         Metodos.vaciarTextBox(listaTxt);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("El producto no pudo ser cargado");
                 }
@@ -313,7 +313,7 @@ namespace presentación
                             Metodos.copiarImagen(producto, file, txtAgregarImagen);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Cambie la imagen y luego intenté guardar nuevamente");
                         file = null;
@@ -372,7 +372,7 @@ namespace presentación
 
                     return;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show(Opciones.MensajeError.ERRORCARGAMARCA);
                 }
@@ -414,7 +414,7 @@ namespace presentación
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show(Opciones.MensajeError.ERRORCARGAMARCA);
                 }
@@ -464,7 +464,7 @@ namespace presentación
                 {
                     Metodos.cargarimagen(pbCargarProducto, file.FileName);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("La iamgen no pudo ser cargada");
                 }

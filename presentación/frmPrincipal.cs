@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using negocio;
 using dominio;
 using helper;
 using configuracion;
 using System.IO;
-using Microsoft.Office.Interop.Excel;
 
 namespace presentación
 {
@@ -90,7 +86,7 @@ namespace presentación
                 listaProductos = productos.listar();
                 listaProductosAux = listaProductos;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show(Opciones.MensajeError.LISTAERROR);
             }
@@ -138,7 +134,7 @@ namespace presentación
 
                 mostrarPorCantidad();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show(Opciones.MensajeError.CAMPOVACIO);
             }

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
@@ -13,12 +9,7 @@ using helper;
 using configuracion;
 using System.IO;
 using System.Drawing.Printing;
-using System.Xml.Linq;
-using System.Drawing.Imaging;
-using System.Diagnostics;
-using System.Security.Cryptography;
 using Microsoft.Office.Interop.Excel;
-using System.Data.OleDb;
 
 namespace presentación
 {
@@ -188,6 +179,7 @@ namespace presentación
                 auxModificar = null;
 
                 cargarGridView();
+                opcionModificar();
                 Total();
             }
         }
@@ -241,26 +233,32 @@ namespace presentación
 
         private void dgvPresupuesto_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            auxModificar = (Presupuesto)dgvPresupuesto.CurrentRow.DataBoundItem;
-            numericModificarPresupuesto.Value = auxModificar.cantidad;
-            txtModificarPrecio.Text = auxModificar.Precio.ToString("N2");
-            opcionModificar(true);
+           if(listaPresupuesto.Count > 0)
+            {
+                auxModificar = (Presupuesto)dgvPresupuesto.CurrentRow.DataBoundItem;
+                numericModificarPresupuesto.Value = auxModificar.cantidad;
+                txtModificarPrecio.Text = auxModificar.Precio.ToString("N2");
+                opcionModificar(true);
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
             //Modificar objeto
-            auxModificar.cantidad = (int)numericModificarPresupuesto.Value;
-            auxModificar.Precio = Convert.ToDecimal(txtModificarPrecio.Text.Replace(".", ","));
-            auxModificar.total = auxModificar.cantidad * auxModificar.Precio;
+            if(listaPresupuesto.Count > 0)
+            {
+                auxModificar.cantidad = (int)numericModificarPresupuesto.Value;
+                auxModificar.Precio = Convert.ToDecimal(txtModificarPrecio.Text.Replace(".", ","));
+                auxModificar.total = auxModificar.cantidad * auxModificar.Precio;
 
-            listaPresupuesto.Remove(auxModificar);
-            listaPresupuesto.Add(auxModificar);
+                listaPresupuesto.Remove(auxModificar);
+                listaPresupuesto.Add(auxModificar);
 
-            cargarGridView();
+                cargarGridView();
 
-            Total();
-            opcionModificar();
+                Total();
+                opcionModificar();
+            }
         }
 
         private void  opcionModificar(bool isModicado = false)
