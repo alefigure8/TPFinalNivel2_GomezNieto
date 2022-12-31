@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using negocio;
 using dominio;
 using configuracion;
@@ -12,8 +8,6 @@ namespace helper
 {
     public class listaDesplegable
     {
-        private List<string> categorias;
-        private List<string> marcas;
         private List<string> columnasProductos;
         private List<string> cantidadPorPagina;
         private List<string> criterioBusquedaTexto;
@@ -27,8 +21,6 @@ namespace helper
                 Opciones.Campo.CODIGO,
                 Opciones.Campo.PRECIO,
                 Opciones.Campo.DESCRIPCION,
-                //Opciones.Campo.MARCA,
-                //Opciones.Campo.CATEGORIA,
             };
             return columnasProductos;
         }

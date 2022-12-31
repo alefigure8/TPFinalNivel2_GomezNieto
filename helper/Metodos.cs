@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Configuration;
@@ -16,9 +14,7 @@ namespace helper
         static public void copiarImagen(Producto producto, OpenFileDialog file, TextBox txtImagen)
         {
             string path = ConfigurationManager.AppSettings[Opciones.Folder.IMAGE];
-            //string path = Path.GetDirectoryName(Application.StartupPath) + Opciones.Folder.IMAGE + file.SafeFileName;
-            //Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.IMAGE
-            Console.WriteLine(path);
+
             if (!Directory.Exists(path))
             {                                      
                 Directory.CreateDirectory(path);
@@ -26,25 +22,28 @@ namespace helper
 
             try
             {
-                File.Copy(file.FileName, path + file.SafeFileName);
-                producto.ImagenURL = path + file.SafeFileName;
-                txtImagen.Text = path + file.SafeFileName;
-            }
-            catch (Exception ex)
-            {
-                DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
-
-                if (result == DialogResult.OK)
+                if(File.Exists(path + file.SafeFileName))
                 {
-                    File.Delete(path + file.SafeFileName);
+                    DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
+
+                    if (result == DialogResult.OK)
+                    {
+                        File.Delete(path + file.SafeFileName);
+                        File.Copy(file.FileName, path + file.SafeFileName);
+                        producto.ImagenURL = path + file.SafeFileName;
+                        txtImagen.Text = path + file.SafeFileName;
+                    }
+                }
+                else
+                {
                     File.Copy(file.FileName, path + file.SafeFileName);
                     producto.ImagenURL = path + file.SafeFileName;
                     txtImagen.Text = path + file.SafeFileName;
                 }
-                else
-                {
+            }
+            catch (Exception ex)
+            {
                     throw ex;
-                }
             }
         }
 
@@ -73,7 +72,7 @@ namespace helper
             {
                 pictureBox.Load(image);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 string path = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + Opciones.Folder.ROOTIMAGE;
                 pictureBox.Load(path + Opciones.Folder.PLACEHOLDER);
